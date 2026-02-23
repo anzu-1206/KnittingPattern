@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_type: MyString
+  grid_width: 1
+  grid_height: 1
+  pattern_data: MyText
+
+two:
+  start_type: MyString
+  grid_width: 1
+  grid_height: 1
+  pattern_data: MyText

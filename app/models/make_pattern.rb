@@ -1,0 +1,2 @@
+class MakePattern < ApplicationRecord
+end
