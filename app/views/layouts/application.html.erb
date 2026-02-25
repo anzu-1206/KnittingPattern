@@ -29,10 +29,10 @@
       <a href="/rooms/index"><img class="header-logo" src="">Ami-Labo</a>
       <div class="header-container">
         <ul class="header-contents">
-          <li><%=link_to "パターン一覧", :class => "head-link" %></li>
-          <li><%=link_to "投稿ページ", :class => "head-link" %></li>
-          <li><%=link_to "お問い合わせ", :class => "head-link" %></li>
-          <li><%=link_to "作者について", :class => "head-link" %></li>
+          <li><%=link_to "パターン一覧", makepatterns_index_path, :class => "head-link" %></li>
+          <li><%=link_to "投稿ページ", makepatterns_index_path, :class => "head-link" %></li>
+          <li><%=link_to "お問い合わせ", makepatterns_index_path, :class => "head-link" %></li>
+          <li><%=link_to "作者について", makepatterns_index_path, :class => "head-link" %></li>
           <li>
             <% if user_signed_in? %>
               <div class="logined-content">
@@ -49,11 +49,11 @@
                 </div>
                 <div class="index-dropdown-contents">
                   <ul class="dropdown-ul">
-                    <li class="dropdown-menu"><%=link_to "施設登録",  :class => "log" %></li>
-                    <li class="dropdown-menu"><%=link_to "予約済み一覧",  :class => "log" %></li>
-                    <li class="dropdown-menu"><%=link_to "登録済み一覧",  :class => "log" %></li>
-                    <li class="dropdown-menu"><%=link_to "アカウント設定",  :class => "log" %></li>
-                    <li class="dropdown-menu"><%= link_to "ログアウト",  method: :delete, :class => "log" %></li>
+                    <li class="dropdown-menu"><%=link_to "施設登録", makepatterns_index_path, :class => "log" %></li>
+                    <li class="dropdown-menu"><%=link_to "予約済み一覧", makepatterns_index_path, :class => "log" %></li>
+                    <li class="dropdown-menu"><%=link_to "登録済み一覧", makepatterns_index_path, :class => "log" %></li>
+                    <li class="dropdown-menu"><%=link_to "アカウント設定", makepatterns_index_path, :class => "log" %></li>
+                    <li class="dropdown-menu"><%= link_to "ログアウト", makepatterns_index_path, method: :delete, :class => "log" %></li>
                   </ul>
                 </div>
               </div>
