@@ -8,7 +8,6 @@
     padding: 70px 100px;
 }
 .first {
-    background-color: #ffe4e1;
 }
 .firstview-title {
     font-size: 50px;
@@ -29,12 +28,18 @@
     padding: 20px 40px;
 }
 
+.second-text {
+    font-size: 18px;
+    line-height: 40px;
+    margin: 0;
+}
+
 .container-title {
     font-size: 30px;
     font-weight: 700;
 }
 .third {
-    background-color: #fdeff2;
+    background-color: #efefef;
 }
 .cando {
     display: flex;
@@ -58,4 +63,55 @@
 .cando-title {
     font-size: 20px;
     font-weight: 700;
+}
+
+.fifth {
+    background-color: #efefef;
+    margin-bottom: 0;
+}
+.technologys {
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+.technologys-list {
+    width: calc(100%/3 - 75px);
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 20px 30px;
+}
+.language {
+    margin-top: 0;
+    color: #e50012;
+}
+.language-role {
+    margin: 0;
+    color: #808080;
+}
+
+.sixth {
+    background-color: #e50012;
+    color: white;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+.sixth-subtitle {
+    margin-top: 0;
+}
+.lets-use {
+    color: #e50012;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 25px;
+    margin-top: 20px;
+    width: 250px;
 }

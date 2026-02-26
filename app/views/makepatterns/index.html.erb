@@ -15,9 +15,10 @@
         <div class="container">
             <!--「なぜ作ったか」のストーリー。 「紙の編み図は修正が大変」「既存ツールが使いにくい」といった悩みを書く。-->
             <h3 class="container-title">開発の背景</h3>
-            <p>オリジナルの作品を編んでいる時、その編み図を記録する方法はスマホのメモアプリや紙にメモするしかありませんでした。<br>
-            少しのミスで紙の編み図を全部書き直し、試行錯誤しながら作品を完成させるのが大変でした。
-            そのうち、「もっと手軽に編み図を作りたい！」と考えるようになり、本アプリの作成を決めました</p>
+            <p class="second-text">オリジナルの作品を編んでいる時、<br>
+            その編み図を記録する方法はスマホのメモアプリや紙にメモするしかありませんでした。<br>
+            少しのミスで紙の編み図を全部書き直し、試行錯誤しながら作品を完成させるのが大変でした。<br>
+            そのうち、「もっと手軽に編み図を作りたい！」と考えるようになり、本アプリの作成を決めました。</p>
         </div>
 
         <div class="container third">
@@ -77,39 +78,59 @@
             </ul>
         </div>
 
-        <div class="container">
+        <div class="container fifth">
             <h3 class="container-title">技術スタック</h3>
             <!--使用言語や技術をアイコン付きで。 Rails, jQuery, SQLなどのロゴを並べるとエンジニアらしさが出ます。-->
-            <ul>
-                <li>
+            <ul class="technologys">
+                <li class="technologys-list">
                     <div>
-                        <p>Ruby on Rails</p>
+                        <p class="language">Ruby on Rails</p>
+                        <p class="language-role">Backend Framework</p>
                     </div>
                 </li>
 
-                <li>
+                <li class="technologys-list">
                     <div>
-                        <p>jQuery</p>
+                        <p class="language">jQuery</p>
+                        <p class="language-role">fronted intereaction</p>
                     </div>
                 </li>
 
-                <li>
+                <li class="technologys-list">
                     <div>
-                        <p>JavaScript</p>
+                        <p class="language">JavaScript</p>
+                        <p class="language-role">fronted intereaction</p>
                     </div>
                 </li>
 
-                <li>
+                <li class="technologys-list">
                     <div>
-                        <p>HTML/ CSS</p>
+                        <p class="language">PostgreSQL</p>
+                        <p class="language-role">Database Management System</p>
+                    </div>
+                </li>
+
+                <li class="technologys-list">
+                    <div>
+                        <p class="language">HTML</p>
+                        <p class="language-role">Markup Language</p>
+                    </div>
+                </li>
+
+                <li class="technologys-list">
+                    <div>
+                        <p class="language">CSS</p>
+                        <p class="language-role">Stylesheet Language</p>
                     </div>
                 </li>
             </ul>
         </div>
 
-        <div class="container">
+        <div class="container sixth">
             <!--「さっそく使ってみる」ボタン。 最後にユーザーの背中を押す場所です。-->
-            <%= link_to "さっそく使ってみる", :class => "lets-use" %>
+            <h3 class="container-title">あなただけの編み図を作りませんか？</h3>
+            <p class="sixth-subtitle">まずは登録なしで気軽に、お手元の作品を編み図にしてみましょう。</p>
+            <%= link_to "無料で使ってみる", makepatterns_index_path, :class => "lets-use" %>
         </div>
 
     </div>
