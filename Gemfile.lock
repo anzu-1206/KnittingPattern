@@ -350,7 +350,7 @@ DEPENDENCIES
   listen (~> 3.3)
   pry-rails
   puma (~> 6.0)
-  rails (= 7.2.2.1)
+  rails (~> 7.2.2)
   rails-i18n
   ransack
   rspec-rails
