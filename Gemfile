@@ -63,7 +63,7 @@ gem "bootstrap-sass", "~>3.3.6"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 
-gem "minitest", "< 6"
+gem "rspec-rails"
 
 gem "pry-rails"
 gem "rails-i18n"
