@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem "rails", "= 7.2.2.1"
+gem "rails", "~> 7.2.2"
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
@@ -63,7 +63,7 @@ gem "bootstrap-sass", "~>3.3.6"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 
-gem "minitest", "< 6"
+gem "rspec-rails"
 
 gem "pry-rails"
 gem "rails-i18n"
