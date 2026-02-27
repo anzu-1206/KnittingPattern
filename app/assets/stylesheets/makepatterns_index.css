@@ -1,0 +1,118 @@
+.firstview {
+    text-align: center;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 150px;
+    padding: 70px 100px;
+}
+.first {
+    background-color: #fef4f4;
+}
+.firstview-title {
+    font-size: 50px;
+    font-weight: 900;
+}
+.color-change {
+    color: #e50012;
+}
+.firstview-img {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.guestlogin {
+    margin-top: 40px;
+    color: white;
+    background-color: #e50012;
+    padding: 20px 40px;
+}
+
+.second-text {
+    font-size: 18px;
+    line-height: 40px;
+    margin: 0;
+}
+
+.container-title {
+    font-size: 30px;
+    font-weight: 700;
+}
+.third {
+    background-color: #efefef;
+}
+.cando {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 0;
+    width: 100%;
+}
+.cando-list {
+    width: calc(100% / 3);
+    padding: 30px 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+.can-img {
+    width: 30px;
+    filter: invert(10%) sepia(91%) saturate(7451%) hue-rotate(352deg) brightness(91%) contrast(105%);
+    padding: 8px;
+    border-radius: 10px;
+}
+.cando-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.fifth {
+    background-color: #efefef;
+    margin-bottom: 0;
+}
+.technologys {
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+.technologys-list {
+    width: calc(100%/3 - 75px);
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 20px 30px;
+}
+.language {
+    margin-top: 0;
+    color: #e50012;
+}
+.language-role {
+    margin: 0;
+    color: #808080;
+}
+
+.sixth {
+    background-color: #e50012;
+    color: white;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+.sixth-subtitle {
+    margin-top: 0;
+}
+.lets-use {
+    color: #e50012;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 25px;
+    margin-top: 20px;
+    width: 250px;
+}
