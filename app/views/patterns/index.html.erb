@@ -1,10 +1,11 @@
 <%= stylesheet_link_tag "patterns_index", "data-turbo-track": "reload" %>
 
 <body>
-    <div class="patterns">
+    <div class="patterns-index">
+        <h3 class="title">パターン一覧</h3>
 
-        <div class="pattern-list">
-            <ul class="search-result">
+        <div class="pattern-container">
+            <ul class="pattern-list">
                 <% @patterns.each do |pattern| %>
                     <li class="pattern">
                         <%= image_tag pattern.image, class: "pattern-image" if pattern.image.attached? %>
