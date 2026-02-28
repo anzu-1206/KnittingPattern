@@ -16,3 +16,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w( footer.css )
 
 Rails.application.config.assets.precompile += %w( makepatterns_index.css )
+
+Rails.application.config.assets.precompile += %w( patterns_index.css )
