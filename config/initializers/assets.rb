@@ -20,3 +20,4 @@ Rails.application.config.assets.precompile += %w( makepatterns_index.css )
 Rails.application.config.assets.precompile += %w( patterns_index.css )
 
 Rails.application.config.assets.precompile += %w( sessions_new.css )
+Rails.application.config.assets.precompile += %w( registrations_new.css )
