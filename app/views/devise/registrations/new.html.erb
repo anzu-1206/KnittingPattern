@@ -11,26 +11,23 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field">
-        <p><%= f.label :name, "ユーザー名", :class => "label" %></p>
-        <p><%= f.text_field :name, placeholder: "お好きな名前を入力", :class => "text-field" %></p>
+        <p class="p-label"><%= f.label :name, "ユーザー名", :class => "label" %></p>
+        <p class="p-field"><%= f.text_field :name, placeholder: "お好きな名前を入力", :class => "text-field" %></p>
       </div>
 
       <div class="field">
-        <p><%= f.label :emai, "メールアドレス", :class => "label" %></p>
-        <p><%= f.email_field :email, placeholder: "メールアドレスを入力", autofocus: true, autocomplete: "email", :class => "text-field" %></p>
+        <p class="p-label"><%= f.label :emai, "メールアドレス", :class => "label" %></p>
+        <p class="p-field"><%= f.email_field :email, placeholder: "メールアドレスを入力", autofocus: true, autocomplete: "email", :class => "text-field" %></p>
       </div>
 
       <div class="field">
-        <p><%= f.label :password, "パスワード", :class => "label" %></p>
-        <% if @minimum_password_length %>
-          <p><em>(<%= @minimum_password_length %> characters minimum)</em></p>
-        <% end %>
-        <p><%= f.password_field :password, placeholder: "6文字以上の英数字", autocomplete: "new-password", :class => "text-field" %></p>
+        <p class="p-label"><%= f.label :password, "パスワード", :class => "label" %></p>
+        <p class="p-field"><%= f.password_field :password, placeholder: "6文字以上の英数字", autocomplete: "new-password", :class => "text-field" %></p>
       </div>
 
       <div class="field">
-        <p><%= f.label :password_confirmation, "パスワード（確認用）", :class => "label" %></p>
-        <p><%= f.password_field :password_confirmation, placeholder: "もう一度入力してください", autocomplete: "new-password", :class => "text-field" %></p>
+        <p class="p-label"><%= f.label :password_confirmation, "パスワード（確認用）", :class => "label" %></p>
+        <p class="p-field"><%= f.password_field :password_confirmation, placeholder: "もう一度入力してください", autocomplete: "new-password", :class => "text-field" %></p>
       </div>
 
       <div class="actions">
