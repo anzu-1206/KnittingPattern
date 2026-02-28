@@ -1,0 +1,14 @@
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 40px 100px;
+}
+.footer-contents-list {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.footer-link {
+    color: #939393;
+}

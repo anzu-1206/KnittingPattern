@@ -1,0 +1,11 @@
+.patterns-index {
+    padding: 50px 100px;
+}
+.title {
+    font-size: 24px;
+    font-weight: 700;
+}
+.pattern-list {
+    padding-left: 0;
+    list-style: none;
+}
