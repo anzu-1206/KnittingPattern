@@ -1,29 +1,48 @@
-<h2>Sign up</h2>
+<%= stylesheet_link_tag "registrations_new", "data-turbo-track": "reload" %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <p><%= f.label :email %></p>
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
+<div class="body">
+  <div class="login-head">
+    <h2 class="login-title">新規登録</h2>
+    <p class="login-text">Ami-Laboへようこそ！</p>
   </div>
+  <div class="resistrations-new">
 
-  <div class="field">
-    <p><%= f.label :password %></p>
-    <% if @minimum_password_length %>
-      <p><em>(<%= @minimum_password_length %> characters minimum)</em></p>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <p class="p-label"><%= f.label :name, "ユーザー名", :class => "label" %></p>
+        <p class="p-field"><%= f.text_field :name, placeholder: "お好きな名前を入力", :class => "text-field" %></p>
+      </div>
+
+      <div class="field">
+        <p class="p-label"><%= f.label :emai, "メールアドレス", :class => "label" %></p>
+        <p class="p-field"><%= f.email_field :email, placeholder: "メールアドレスを入力", autofocus: true, autocomplete: "email", :class => "text-field" %></p>
+      </div>
+
+      <div class="field">
+        <p class="p-label"><%= f.label :password, "パスワード", :class => "label" %></p>
+        <p class="p-field"><%= f.password_field :password, placeholder: "6文字以上の英数字", autocomplete: "new-password", :class => "text-field" %></p>
+      </div>
+
+      <div class="field">
+        <p class="p-label"><%= f.label :password_confirmation, "パスワード（確認用）", :class => "label" %></p>
+        <p class="p-field"><%= f.password_field :password_confirmation, placeholder: "もう一度入力してください", autocomplete: "new-password", :class => "text-field" %></p>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "新規登録", :class => "to-create" %>
+      </div>
+
+      <div class="login-container">
+        <ul class="buttons">
+          <li class="btn">すでにアカウントをお持ちの方</li>
+          <li class="btn"><%= link_to "ログインはこちら", new_user_session_path, :class => "to-session" %></li>
+        </ul>
+      </div>
     <% end %>
-    <p><%= f.password_field :password, autocomplete: "new-password" %></p>
-  </div>
 
-  <div class="field">
-    <p><%= f.label :password_confirmation %></p>
-    <p><%= f.password_field :password_confirmation, autocomplete: "new-password" %></p>
   </div>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<%= render "shared/footer" %>

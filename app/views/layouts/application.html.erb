@@ -14,7 +14,7 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <%= javascript_importmap_tags %>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -26,10 +26,9 @@
   <body>
   <header>
     <div class="header">
-      <a href="/rooms/index"><img class="header-logo" src="">Ami-Labo（仮）</a>
+      <a href="/makepatterns/index"><img class="header-logo" src="">Ami-Labo（仮）</a>
       <div class="header-container">
         <ul class="header-contents">
-          <li><%=link_to "パターン一覧", patterns_index_path, :class => "head-link" %></li>
           <li><%=link_to "投稿ページ", makepatterns_index_path, :class => "head-link" %></li>
           <li><%=link_to "お問い合わせ", makepatterns_index_path, :class => "head-link" %></li>
           <li><%=link_to "作者について", makepatterns_index_path, :class => "head-link" %></li>
@@ -44,16 +43,13 @@
                       <%= image_tag "https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png", size: "40x40" %>
                     <% end %>
                   </span>
-                  <span class="profile-name"><%= current_user.name %></span>
                   <svg class="dropdown-svg" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M14 19h-14v-1h14v1zm9.247-8.609l-3.247 4.049-3.263-4.062-.737.622 4 5 4-5-.753-.609zm-9.247 2.609h-14v-1h14v1zm0-6h-14v-1h14v1z"/></svg>
                 </div>
                 <div class="index-dropdown-contents">
                   <ul class="dropdown-ul">
-                    <li class="dropdown-menu"><%=link_to "施設登録", makepatterns_index_path, :class => "log" %></li>
-                    <li class="dropdown-menu"><%=link_to "予約済み一覧", makepatterns_index_path, :class => "log" %></li>
-                    <li class="dropdown-menu"><%=link_to "登録済み一覧", makepatterns_index_path, :class => "log" %></li>
-                    <li class="dropdown-menu"><%=link_to "アカウント設定", makepatterns_index_path, :class => "log" %></li>
-                    <li class="dropdown-menu"><%= link_to "ログアウト", makepatterns_index_path, method: :delete, :class => "log" %></li>
+                    <li class="dropdown-menu"><%=link_to "▸ パターン一覧", patterns_index_path, :class => "log" %></li>
+                    <li class="dropdown-menu"><%=link_to "▸ アカウント設定", makepatterns_index_path, :class => "log" %></li>
+                    <li class="dropdown-menu"><%= link_to "▸ ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, :class => "log" %></li>
                   </ul>
                 </div>
               </div>
@@ -70,6 +66,12 @@
       </div>
     </div>
   </header>
+  <% if notice %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
     <%= yield %>
   </body>
 </html>
