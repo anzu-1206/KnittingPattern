@@ -20,8 +20,12 @@ Rails.application.config.assets.precompile += %w( makepatterns_index.css )
 Rails.application.config.assets.precompile += %w( patterns_index.css )
 
 Rails.application.config.assets.precompile += %w( sessions_new.css )
+Rails.application.config.assets.precompile += %w( sessions_account_setting.css )
+Rails.application.config.assets.precompile += %w( users_new.css )
+
 Rails.application.config.assets.precompile += %w( registrations_new.css )
 
 Rails.application.config.assets.precompile += %w( controllers/hello_controller.js )
 Rails.application.config.assets.precompile += %w( controllers/index.js )
 Rails.application.config.assets.precompile += %w( script.js )
+Rails.application.config.assets.precompile += %w( tab.js )
