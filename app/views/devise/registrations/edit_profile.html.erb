@@ -1,0 +1,41 @@
+<%= stylesheet_link_tag "users_new", "data-turbo-track": "reload" %>
+
+<body>
+
+<div class="new">
+    <div class="signup">
+
+        <%= form_with model: resource, url: registration_path(@user), method: :patch do |f| %>
+
+
+            <div class="new-table">
+                <h3 class="signup-title">ユーザー情報編集</h3>
+
+                <div class="new-tr">
+                    <%= f.label :image ,"画像", :class =>"form-name" %>
+                    <%= f.file_field :image, accept: "image/*", :class =>"form-text" %>
+                </div>
+
+                <div class="new-form">
+                    <label><%= f.label :name ,"ユーザー名" %></label>
+                    <%= f.text_field :name, placeholder: "ユーザー名を入力", :class =>"form-text" %>
+                </div>
+
+                <div class="new-form">
+                    <label><%= f.label :introduction ,"自己紹介" %></label>
+                    <%= f.text_area :introduction, placeholder: "自己紹介を入力", :class =>"form-text" %>
+                </div>
+
+
+
+            <div class="submit-form">
+                <ul class="buttons">
+                    <li><%= f.submit "編集内容を登録", :class =>"submit"%></li>
+                    <li class="li-login"><%= link_to "キャンセル", account_setting_user_session_path, :class =>"cansel" %></li>
+                </ul>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+</body>

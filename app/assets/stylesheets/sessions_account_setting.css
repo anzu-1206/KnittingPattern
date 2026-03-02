@@ -1,0 +1,84 @@
+p {
+    margin: 0;
+}
+.setting-edit {
+    color: #0071c1;
+    text-decoration: none;
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    gap: 10px;
+}
+.account-setting {
+    padding: 50px 100px;
+}
+.setting-title {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 39px;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+.setting-container {
+    display: flex;
+    gap: 32px;
+    justify-content: space-between;
+}
+.setting-tab {
+    list-style: none;
+    border: 1px solid #dfe2e6;
+    height: fit-content;
+    width: 336px;
+    padding: 0;
+    margin: 0;
+}
+.setting-tab-item:first-of-type {
+    border-bottom: 1px solid #dfe2e6;
+}
+.setting-tab-item {
+    padding: 20px 24px;
+}
+.tabpages {
+    color: #e50012;
+}
+.setting-body {
+    width: 100%;
+}
+.account-information {
+    width: calc(100% - 32px);
+}
+.list-top {
+    align-items: center;
+    border-bottom: 1px solid #dfe2e6;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 8px;
+}
+.information-title {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 39px;
+    margin-top: 0;
+}
+.edit-svg {
+    width: 24px;
+    filter: invert(34%) sepia(99%) saturate(1392%) hue-rotate(184deg) brightness(79%) contrast(101%);
+}
+.setting-item {
+    align-items: center;
+    display: flex;
+    margin-bottom: 24px;
+}
+.setting-item-title {
+    color: #333;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 26px;
+    width: 25%;
+}
+.setting-item-data {
+    margin-bottom: 0;
+    width: 75%;
+}

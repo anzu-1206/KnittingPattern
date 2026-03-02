@@ -20,9 +20,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    @user = current_user
+    if resource.update_without_password(post_params)
+      redirect_to account_setting_user_session_path, notice: "更新しました！"
+    else
+      puts @user.errors.full_messages
+      render :account_setting, status: :unprocessable_entity
+    end
+  end
 
   # DELETE /resource
   # def destroy
@@ -38,7 +44,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  def edit_profile
+    @user = current_user
+  end
+
+  def edit_account
+    @user = current_user
+  end
+
+  protected
+
+  def post_params
+    params.require(:user).permit(:name, :email,:introduction, :password, :image)
+  end
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
+
+  def after_update_path_for(resource)
+    account_setting_user_session_path 
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
