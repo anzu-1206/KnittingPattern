@@ -1,24 +1,11 @@
-document.addEventListener('click', (e) => {
-    const dropdown = e.target.closest('.index-dropdown');
+const dropdown = document.getElementById('IndexDropdown');
+const menu = document.getElementById('IndexDropdownContents');
 
-    if (!dropdown) {
-        document.querySelectorAll('.index-dropdown-contents').forEach(m => {
-            m.style.display = 'none';
-        });
-        return;
-    }
+dropdown.addEventListener('click', () => {
 
-    const menu = dropdown.nextElementSibling;
-
-    document.querySelectorAll('.index-dropdown-contents').forEach(m => {
-        if (m !== menu) m.style.display = 'none';
-    });
-
-    if (menu) {
-        if (menu.style.display === 'block') {
-            menu.style.display = 'none';
-        } else {
-            menu.style.display = 'block';
-        }
+    if (menu.style.display === "none") {
+        menu.style.display = "block";
+    } else {
+        menu.style.display = "none";
     }
 });

@@ -68,6 +68,8 @@ header {
 .index-dropdown {
     display: flex;
     align-items: center;
+    border: none;
+    background-color: white;
 }
 .profile-img {
     margin-right: 8px;
