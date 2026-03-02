@@ -5,7 +5,7 @@ document.addEventListener('turbo:load', function() {
         return;
     }
     
-    const tabs = tabControl.querySelectorAll('a');
+    const tabs = tabControl.querySelectorAll('.tabpages');
     const pages = document.getElementById('tabbody').children;
 
     function changeTab() {

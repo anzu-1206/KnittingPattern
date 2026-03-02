@@ -2,7 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-import "script"
+import "dropdown"
 import "tab"
 
 //= require rails-ujs

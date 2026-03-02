@@ -1,14 +1,14 @@
 document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.index-dropdown');
+    const dropdown = e.target.closest('.index-dropdown');
 
-    if (!btn) {
+    if (!dropdown) {
         document.querySelectorAll('.index-dropdown-contents').forEach(m => {
             m.style.display = 'none';
         });
         return;
     }
 
-    const menu = btn.nextElementSibling;
+    const menu = dropdown.nextElementSibling;
 
     document.querySelectorAll('.index-dropdown-contents').forEach(m => {
         if (m !== menu) m.style.display = 'none';
