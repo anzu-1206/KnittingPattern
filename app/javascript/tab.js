@@ -1,7 +1,9 @@
 document.addEventListener('turbo:load', function() {
     const tabControl = document.getElementById('tabcontrol');
 
-    if (!tabControl) return;
+    if (tabControl == null){
+        return;
+    }
     
     const tabs = tabControl.querySelectorAll('a');
     const pages = document.getElementById('tabbody').children;
