@@ -16,6 +16,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w( footer.css )
 
 Rails.application.config.assets.precompile += %w( makepatterns_index.css )
+Rails.application.config.assets.precompile += %w( makepatterns_aboutme.css )
 
 Rails.application.config.assets.precompile += %w( patterns_index.css )
 
@@ -27,5 +28,5 @@ Rails.application.config.assets.precompile += %w( registrations_new.css )
 
 Rails.application.config.assets.precompile += %w( controllers/hello_controller.js )
 Rails.application.config.assets.precompile += %w( controllers/index.js )
-Rails.application.config.assets.precompile += %w( script.js )
+Rails.application.config.assets.precompile += %w( dropdown.js )
 Rails.application.config.assets.precompile += %w( tab.js )
