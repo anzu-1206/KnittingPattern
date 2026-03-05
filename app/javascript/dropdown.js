@@ -1,11 +1,13 @@
-const dropdown = document.getElementById('IndexDropdown');
-const menu = document.getElementById('IndexDropdownContents');
+document.addEventListener("turbo:load", () => {
+    const dropdown = document.getElementById('IndexDropdown');
+    const menu = document.getElementById('IndexDropdownContents');
 
-dropdown.addEventListener('click', () => {
+    dropdown.addEventListener('click', () => {
 
-    if (menu.style.display === "none") {
-        menu.style.display = "block";
-    } else {
-        menu.style.display = "none";
-    }
+        if (menu.style.display === "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    });
 });

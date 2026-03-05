@@ -28,6 +28,9 @@ h3 {
 }
 header {
     display: block;
+    position: sticky;
+    top: 0;
+    background-color: white;
 }
 .header {
     height: 80px;
