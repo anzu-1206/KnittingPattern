@@ -1,11 +1,10 @@
 <%= stylesheet_link_tag "makepatterns_aboutme", "data-turbo-track": "reload" %>
 
 <body>
-
     <div class="wrapper">
 
         <section class="content-section">
-            <div class="column-right">
+            <div>
                 <h2 class="section-heading">ABOUT ME</h2>
                 <div class="introduction-section">
                     <p class="text-body">
@@ -17,7 +16,7 @@
 
         <section class="content-section">
             <div class="profile-header">
-                <h2 class="project-title">Profile</h2>
+                <h2 class="section-heading">Profile</h2>
                 <div class="introduction-section">
                     <ul class="introduction-item">
                         <li>名前</li>
@@ -37,78 +36,136 @@
 
         <section class="content-section">
             <div class="skillset-header">
-                <h2 class="project-title">My Skill Set</h2>
-                <div class="introduction-section">
-                    <ul class="introduction-item">
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JavaScript</li>
-                        <li>jQuery</li>
-                        <li>Ruby</li>
-                        <li>SQL</li>
-                        <li>Ruby on Rails</li>
-                    </ul>
-                    <ul class="introduction-item">
-                        <li>★★★★★</li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                <h2 class="section-heading">My Skill Set</h2>
+                <div class="skillset-section">
+                    <ul class="skillset-item">
+                        <li class="skills">HTML</li>
+                        <li class="skills">CSS</li>
+                        <li class="skills">JavaScript</li>
+                        <li class="skills">jQuery</li>
+                        <li class="skills">Ruby</li>
+                        <li class="skills">SQL</li>
+                        <li class="skills">Ruby on Rails</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <div>
-            <section class="content-section">
-                <h2 class="project-title">Learning Journey</h2>
-                <div class="project-header">
-                    <span class="project-number">01</span>
-                    <h2 class="project-title">Project Name</h2>
-                </div>
-                
-                <div class="two-column">
-                    <div class="column-left">
+        <section class="content-section">
+            <h2 class="section-heading">Learning Journey</h2>
+            <div class="learning-journey">
+                <section class="works">
+                    <div class="project-header">
+                        <span class="project-number">01</span>
+                        <h2 class="project-title">Site Repoduction</h2>
+                    </div>
+                    
+                    <div class="two-column">
+                        <%= image_tag "copy-site.png", :class => "works-img" %>
                         <p class="text-body">
                             スクールの課題で作成したWebサイトの模写コーディングです。<br>
-                            レスポンシブ対応はもちろん、JavaScriptを用いた動きのある実装も行いました。<br><br>
-                            使用技術：HTML, CSS, jQuery
+                            レスポンシブ対応も行っています。<br><br>
+                            使用技術：HTML, CSS
                         </p>
                     </div>
-                    <div class="column-right">
-                        <div class="image-grid">
-                            <div class="image-box large"></div>
-                            <div class="image-box small"></div>
-                            <div class="image-box small"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <section class="content-section">
-                <div class="project-header">
-                    <span class="project-number">02</span>
-                    <h2 class="project-title">Rails App</h2>
-                </div>
-                
-                <div class="two-column reverse">
-                    <div class="column-left">
-                        <div class="image-box large" style="height: 300px;"></div>
+                <section class="works">
+                    <div class="project-header">
+                        <span class="project-number">02</span>
+                        <h2 class="project-title">Stopwatch</h2>
                     </div>
-                    <div class="column-right">
-                        <h3 class="sub-heading">Application Design</h3>
+                    
+                    <div class="two-column">
+                        <%= image_tag "stopwatch.png", :class => "works-img" %>
                         <p class="text-body">
-                            Ruby on Railsを用いて作成したタスク管理アプリです。<br>
-                            データベース設計から行い、ユーザー認証機能も実装しています。<br>
-                            シンプルで使いやすいUIを目指しました。
+                            JavaScriptを用いたストップウォッチアプリです。<br>
+                            動的なDOM操作とイベントハンドリングの基礎を習得しました。<br><br>
+                            使用技術：HTML, CSS, JavaScript
                         </p>
-                        <div class="image-box small" style="margin-top:20px; height: 150px;"></div>
                     </div>
-                </div>
-            </section>
-        </div>
+                </section>
+
+                <section class="works">
+                    <div class="project-header">
+                        <span class="project-number">03</span>
+                        <h2 class="project-title">Calculator</h2>
+                    </div>
+                    
+                    <div class="two-column">
+                        <%= image_tag "calculator.png", :class => "works-img" %>
+                        <p class="text-body">
+                            四則演算のロジックを実装し、計算の優先順位や例外処理（0での割り算など）の考え方を深く学びました。<br><br>
+                            使用技術：HTML, CSS, JavaScript
+                        </p>
+                    </div>
+                </section>
+
+                <section class="works">
+                    <div class="project-header">
+                        <span class="project-number">04</span>
+                        <h2 class="project-title">Janken Game</h2>
+                    </div>
+                    
+                    <div class="two-column">
+                        <%= image_tag "janken.png", :class => "works-img" %>
+                        <p class="text-body">
+                            Rubyを用いた初めてのプログラムとして、条件分岐や繰り返し処理を駆使した対戦機能を構築しました。<br>
+                            じゃんけんのみならず、あっち向いてホイゲームも実装しています。<br><br>
+                            使用技術：Ruby
+                        </p>
+                    </div>
+                </section>
+
+                <section class="works">
+                    <div class="project-header">
+                        <span class="project-number">05</span>
+                        <h2 class="project-title">Memo Application</h2>
+                    </div>
+                    
+                    <div class="two-column">
+                        <%= image_tag "memo.png", :class => "works-img" %>
+                        <p class="text-body">
+                            メモの新規作成・既存メモの編集といった、データ作成に関する基本的な仕組みを実装しました。<br>
+                            シンプルですが、プログラムがデータを保持・処理していく一連の流れを深く理解する機会となりました。<br><br>
+                            使用技術：Ruby
+                        </p>
+                    </div>
+                </section>
+
+                <section class="works">
+                    <div class="project-header">
+                        <span class="project-number">06</span>
+                        <h2 class="project-title">Schedule Site</h2>
+                    </div>
+                    
+                    <div class="two-column">
+                        <%= image_tag "schedule.png", :class => "works-img" %>
+                        <p class="text-body">
+                            Railsを用いた本格的な開発の第一歩として、CRUD機能を用いたスケジュール管理アプリを実装しました。<br>
+                            MVCモデルの役割分担を意識し、Rails特有の開発フローの基礎を習得しました。<br><br>
+                            使用技術：Ruby on Rails
+                        </p>
+                    </div>
+                </section>
+
+                <section class="works">
+                    <div class="project-header">
+                        <span class="project-number">07</span>
+                        <h2 class="project-title">Hotel Booking Site</h2>
+                    </div>
+                    
+                    <div class="two-column">
+                        <%= image_tag "hotel-reservation.png", :class => "works-img" %>
+                        <p class="text-body">
+                            ログイン機能や予約管理など、実戦的な機能を盛り込んだ大規模なWebシステムの構築に挑戦しました。<br>
+                            ユーザーと予約情報の紐付けや管理画面の制作を通じて、Webアプリの全体像を深く学びました。<br><br>
+                            使用技術：Ruby on Rails
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </section>
 
         <section class="content-section">
             <div class="column-right">
@@ -134,15 +191,20 @@
         <section class="content-section footer-section">
             <div class="contact-info">
                 <h2 class="section-heading">Contact Info</h2>
-                <p class="text-body">
-                    Email: your-email@example.com<br>
-                    Twitter: @youraccount
-                </p>
-            </div>
-            <div class="footer-graphic">
-                <div class="image-box" style="height: 100px;"></div>
+                <div class="introduction-section">
+                    <ul class="introduction-item">
+                        <li class="text-body">Email</li>
+                        <li class="text-body">Twitter</li>
+                    </ul>
+                    <ul class="introduction-item">
+                        <li class="text-body">azlxd3525sa@gmail.com</li>
+                        <li class="text-body">@az6357478521291</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-    </・div>
+    </div>
+
+    <%= render "shared/footer" %>
 </body>
