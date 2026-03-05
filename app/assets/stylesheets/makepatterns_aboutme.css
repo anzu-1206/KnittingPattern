@@ -21,8 +21,14 @@ h1, h2, .project-number {
     text-transform: uppercase;
     line-height: 1.1;
 }
+.head-text {
+    font-size: 15px;
+    line-height: 35px;
+    color: #4a4a4a;
+    text-align: center;
+}
 .text-body {
-    font-size: 0.9rem;
+    font-size: 15px;
     color: #4a4a4a;
     text-align: justify;
 }
@@ -64,10 +70,15 @@ h1, h2, .project-number {
 
 .skillset-item {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    flex-wrap: wrap;
     width: 100%;
     padding-left: 0;
+    gap: 15px;
+}
+.skills-column {
+    display: flex;
+    justify-content: center;
     gap: 15px;
 }
 .skills {
