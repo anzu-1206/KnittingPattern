@@ -1,0 +1,322 @@
+$(document).on('turbo:load', function() {
+
+    let patternData = []; 
+    let currentRow = 0;
+    let currentCell = 0;
+    let scale = 1.0;
+
+    const $canvas = $('#knitting-canvas');
+    const $viewport = $('#canvas-viewport');
+
+    $('#start-btn').on('click', function() {
+        const count = prompt("作り目の数は？（半角数字）", "20");
+        if (count && !isNaN(count)) {
+            const num = parseInt(count);
+            patternData = [Array.from({ length: num }, () => ({ color: null }))];
+            currentRow = 0;
+            currentCell = 0;
+            scale = 1.0;
+            updateTransform();
+            renderCanvas();
+        }
+    });
+
+
+    function renderCanvas() {
+        $('#row-counter').text('段目: ' + (currentRow + 1));
+        $canvas.empty();
+
+        patternData.forEach((row, rIdx) => {
+            const $rowDiv = $('<div class="knit-row"></div>');
+
+            row.forEach((cell, cIdx) => {
+                const $cellDiv = $('<div class="cell"></div>');
+                
+                const currentRatio = $('#gauge-ratio').val() || 1.0;
+                $cellDiv.css('height', (25 * currentRatio) + 'px');
+                
+                $cellDiv.attr('data-r', rIdx);
+                $cellDiv.attr('data-c', cIdx);
+
+                if (cell.color) {
+                    $cellDiv.css('background-color', cell.color);
+                }
+
+                if (rIdx === currentRow && cIdx === currentCell) {
+                    $cellDiv.addClass('active');
+                }
+                
+                $cellDiv.on('click', function(e) {
+                    e.stopPropagation();
+                    if (e.shiftKey) {
+                        const minR = Math.min(currentRow, rIdx);
+                        const maxR = Math.max(currentRow, rIdx);
+                        const minC = Math.min(currentCell, cIdx);
+                        const maxC = Math.max(currentCell, cIdx);
+
+                        $('.cell').removeClass('selected');
+                        $('.cell').each(function() {
+                            const r = parseInt($(this).attr('data-r'));
+                            const c = parseInt($(this).attr('data-c'));
+                            if (r >= minR && r <= maxR && c >= minC && c <= maxC) {
+                                $(this).addClass('selected');
+                            }
+                        });
+                    } else {
+                        $('.cell').removeClass('selected');
+                        currentRow = rIdx;
+                        currentCell = cIdx;
+                        renderCanvas();
+                    }
+                });
+
+                $rowDiv.append($cellDiv);
+            });
+            $canvas.append($rowDiv);
+        });
+    }
+
+
+    $('#confirm-color-btn').on('click', function() {
+        const newColor = $('#color-picker').val();
+        const $btn = $('<button>')
+            .addClass('color-item')
+            .css('background-color', newColor)
+            .attr('data-color', newColor);
+        $('#recent-colors').append($btn);
+    });
+
+
+    $(document).on('click', '.color-item', function() {
+        $('.color-item').removeClass('selected');
+        $(this).addClass('selected');
+
+        const color = $(this).data('color');
+        if (!color) return;
+        if (patternData.length === 0) return;
+
+        const $selectedCells = $('.cell.selected');
+        if ($selectedCells.length > 0) {
+            $selectedCells.each(function() {
+                const r = parseInt($(this).attr('data-r'));
+                const c = parseInt($(this).attr('data-c'));
+                patternData[r][c].color = color;
+            });
+            $('.cell').removeClass('selected');
+            renderCanvas();
+        } else {
+            patternData[currentRow][currentCell].color = color;
+            if (currentCell < patternData[currentRow].length - 1) {
+                currentCell++;
+            }
+            renderCanvas();
+        }
+    });
+
+
+    $('#undo-btn').on('click', function() {
+        if (patternData.length === 0) return;
+        if (!patternData[currentRow][currentCell].color) {
+            if (currentCell > 0) currentCell--;
+            else if (currentRow > 0) { currentRow--; currentCell = patternData[currentRow].length - 1; }
+        }
+        patternData[currentRow][currentCell].color = null;
+        renderCanvas();
+    });
+
+    $('#next-row-btn').on('click', function() {
+        if (patternData.length === 0) return;
+        const lastRow = patternData[patternData.length - 1];
+        const newRow = Array.from({ length: lastRow.length }, () => ({ color: null }));
+        patternData.push(newRow);
+        currentRow = patternData.length - 1;
+        currentCell = 0;
+        renderCanvas();
+    });
+
+    $('#save-btn').on('click', function() {
+        if (patternData.length === 0) return;
+        const title = prompt("タイトルを入力", "わたしの編み図");
+        if (!title) return;
+        $.ajax({
+            url: '/makepatterns',
+            method: 'POST',
+            data: { pattern: { title: title, start_type: 0, data: JSON.stringify(patternData) } },
+            headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+            success: function() { alert("保存しました"); },
+            error: function() { alert("保存失敗"); }
+        });
+    });
+
+    $('#reset-btn').on('click', function() {
+        if (confirm("リセットしますか？")) {
+            patternData = [];
+            currentRow = 0;
+            currentCell = 0;
+            $('#row-counter').text('段目: 0');
+            $canvas.empty();
+        }
+    });
+
+    // --- 6. ズーム機能 ---
+    function updateTransform() {
+        $canvas.css('transform', `scale(${scale})`);
+        $('#zoom-level').text(Math.round(scale * 100) + '%');
+    }
+    $('#zoom-in-btn').on('click', function() { if (scale < 3.0) { scale += 0.1; updateTransform(); } });
+    $('#zoom-out-btn').on('click', function() { if (scale > 0.2) { scale -= 0.1; updateTransform(); } });
+    $('#reset-view-btn').on('click', function() { scale = 1.0; updateTransform(); });
+    
+    $viewport.on('wheel', function(e) {
+        if (e.ctrlKey) { 
+            e.preventDefault();
+            const delta = e.originalEvent.deltaY;
+            if (delta > 0) { if (scale > 0.2) scale -= 0.1; }
+            else { if (scale < 3.0) scale += 0.1; }
+            updateTransform();
+        }
+    });
+
+    // --- 7. 履歴管理 ---
+    $('#clear-history-btn').on('click', function() {
+        if ($('#recent-colors').children().length === 0) return;
+        if (confirm("履歴を削除しますか？")) $('#recent-colors').empty();
+    });
+    $(document).on('contextmenu', '#recent-colors .color-item', function(e) {
+        e.preventDefault();
+        if(confirm('この色を削除しますか？')) $(this).remove();
+        return false;
+    });
+
+    // --- 8. タブ切り替え ---
+    $('.tab-btn').on('click', function() {
+        $('.tab-btn').removeClass('active');
+        $(this).addClass('active');
+        $('.tab-content').removeClass('active');
+        const targetId = $(this).data('target');
+        $(targetId).addClass('active');
+    });
+
+    // --- 9. 画像読み込み（シンプル・そのままの色版） ---
+    // ここを完全に元に戻しました！余計な計算は一切しません。
+    
+    $('#import-btn').on('click', function() { $('#import-image').click(); });
+
+    $('#import-image').on('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                // 1. サイズを決める
+                const inputWidth = prompt("横幅（目数）を入力", "50");
+                if (!inputWidth || isNaN(inputWidth)) return;
+
+                const newCols = parseInt(inputWidth);
+                const aspectRatio = img.height / img.width;
+                const newRows = Math.floor(newCols * aspectRatio);
+
+                if (!confirm(`横${newCols}目 × 縦${newRows}段 で作成しますか？\n（画像の色をそのまま使います）`)) {
+                    $('#import-image').val('');
+                    return;
+                }
+
+                // 2. キャンバス準備（縮小用）
+                const tempCanvas = document.createElement('canvas');
+                const ctx = tempCanvas.getContext('2d');
+                tempCanvas.width = newCols;
+                tempCanvas.height = newRows;
+                
+                // 画像をそのまま描画（ブラウザ標準の縮小）
+                ctx.drawImage(img, 0, 0, newCols, newRows);
+                const imageData = ctx.getImageData(0, 0, newCols, newRows).data;
+
+                // 3. データを格納
+                patternData = [];
+                for (let r = 0; r < newRows; r++) {
+                    const rowData = [];
+                    for(let c = 0; c < newCols; c++) {
+                        // 上下反転して取得
+                        const pixelIndex = ((r) * newCols + c) * 4;
+                        const alpha = imageData[pixelIndex + 3];
+                        let hex = null;
+                        
+                        // 透明じゃなければ色を取得
+                        if (alpha > 128) {
+                            const rVal = imageData[pixelIndex];
+                            const gVal = imageData[pixelIndex + 1];
+                            const bVal = imageData[pixelIndex + 2];
+                            
+                            // 難しい計算なし！RGBをそのままHEXにするだけ
+                            hex = "#" + ((1 << 24) + (rVal << 16) + (gVal << 8) + bVal).toString(16).slice(1);
+                        }
+                        rowData.push({ color: hex });
+                    }
+                    // 画像の上を編み図の最後（上）に追加
+                    patternData.unshift(rowData); 
+                }
+
+                currentRow = 0;
+                currentCell = 0;
+                renderCanvas();
+                $('#import-image').val('');
+                scale = 1.0;
+                updateTransform();
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // --- 10. ゲージ調整 ---
+    $('#gauge-ratio').on('input', function() {
+        const ratio = $(this).val();
+        $('.cell').css('height', (25 * ratio) + 'px');
+    });
+
+    // --- 11. 毛糸量計算 ---
+    $('#calc-yarn-btn').on('click', function() {
+        if (patternData.length === 0) return;
+        let counts = {};
+        patternData.forEach(row => {
+            row.forEach(cell => {
+                if (cell.color) counts[cell.color] = (counts[cell.color] || 0) + 1;
+            });
+        });
+        let html = '';
+        for (const [color, count] of Object.entries(counts)) {
+            const meters = (count * 0.02).toFixed(1);
+            html += `<div style="display:flex; align-items:center; gap:5px; margin-bottom:2px;">
+                        <span style="display:block; width:10px; height:10px; background:${color}; border:1px solid #ccc;"></span>
+                        <span>${count}目 (${meters}m)</span>
+                     </div>`;
+        }
+        $('#yarn-result').html(html || '色が塗られていません');
+    });
+
+    // --- 12. 矢印キー移動 ---
+    $(document).on('keydown', function(e) {
+        if (patternData.length === 0) return;
+        if ($(e.target).is('input, textarea')) return;
+        let moved = false;
+        switch (e.key) {
+            case 'ArrowLeft': if (currentCell > 0) { currentCell--; moved = true; } break;
+            case 'ArrowRight': if (currentCell < patternData[currentRow].length - 1) { currentCell++; moved = true; } break;
+            case 'ArrowUp': 
+                if (currentRow < patternData.length - 1) {
+                    currentRow++;
+                    if (currentCell >= patternData[currentRow].length) currentCell = patternData[currentRow].length - 1;
+                    moved = true;
+                } break;
+            case 'ArrowDown': 
+                if (currentRow > 0) {
+                    currentRow--;
+                    if (currentCell >= patternData[currentRow].length) currentCell = patternData[currentRow].length - 1;
+                    moved = true;
+                } break;
+        }
+        if (moved) { e.preventDefault(); renderCanvas(); }
+    });
+});

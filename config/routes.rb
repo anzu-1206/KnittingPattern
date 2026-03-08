@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get "patterns/index"
   
+  resources :makepatterns
+  
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }

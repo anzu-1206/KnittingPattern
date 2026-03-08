@@ -31,3 +31,4 @@ Rails.application.config.assets.precompile += %w( controllers/hello_controller.j
 Rails.application.config.assets.precompile += %w( controllers/index.js )
 Rails.application.config.assets.precompile += %w( dropdown.js )
 Rails.application.config.assets.precompile += %w( tab.js )
+Rails.application.config.assets.precompile += %w( knitting_editor.js )

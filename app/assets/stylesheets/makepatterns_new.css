@@ -1,0 +1,310 @@
+.editor-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+}
+.editor-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #333;
+    flex-shrink: 0;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+/* サイドバー全体 */
+.symbol-palette {
+    display: flex;
+    flex-direction: column;
+    width: 90px; /* 少し広げました */
+    background: #fff;
+    border-right: 1px solid #ddd;
+    padding: 0; /* パディングは内部で調整 */
+    height: 100%;
+}
+
+/* タブボタンエリア */
+.sidebar-tabs {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+/* タブボタン */
+.tab-btn {
+    flex: 1;
+    border: none;
+    background: #f5f5f5;
+    padding: 8px 0;
+    font-size: 12px;
+    cursor: pointer;
+    color: #666;
+    border-bottom: 2px solid transparent;
+}
+/* アクティブなタブ */
+.tab-btn.active {
+    background: #fff;
+    color: #333;
+    font-weight: bold;
+    border-bottom: 2px solid #333;
+}
+
+/* タブの中身（共通） */
+.tab-content {
+    display: none; /* デフォルトは非表示 */
+    padding: 10px;
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+/* アクティブな中身だけ表示 */
+.tab-content.active {
+    display: block;
+}
+
+/* 設定エリアのスタイル */
+.setting-group {
+    margin-bottom: 15px;
+}
+.setting-label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 5px 0;
+}
+.setting-btn {
+    width: 100%;
+    padding: 5px;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.setting-btn:hover {
+    background: #ddd;
+}
+
+/* 各セクション（ピッカー、履歴） */
+.palette-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* ラベル文字 */
+.palette-label {
+    font-size: 11px;
+    color: #666;
+    margin: 0 0 5px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ピッカーとボタンを包む枠 */
+.picker-wrapper {
+    display: flex;
+    flex-direction: column; /* 縦に積む */
+    gap: 8px;
+    width: 100%;
+}
+
+/* カラーピッカー本体 */
+input[type="color"]#color-picker {
+    width: 100%;   /* 親の幅いっぱいに */
+    height: 40px;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background: none;
+    box-sizing: border-box;
+}
+/* カラーピッカーの色部分の余白を消すハック（Webkit用） */
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0; 
+}
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 3px;
+}
+
+/* 決定（追加）ボタン */
+#confirm-color-btn {
+    width: 100%;
+    height: 30px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#confirm-color-btn:hover {
+    background-color: #555;
+}
+
+/* 区切り線 */
+.palette-divider {
+    width: 80%;
+    height: 1px;
+    background-color: #eee;
+    margin: 15px 0;
+}
+
+/* 履歴リストエリア */
+.history-list {
+    display: flex;
+    flex-wrap: wrap; /* 折り返し */
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+}
+
+/* 履歴に追加されるボタン（.color-item）のスタイル */
+.color-item {
+    width: 24px;   /* 少し小さめにしてたくさん入るように */
+    height: 24px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.color-item:hover {
+    transform: scale(1.1);
+    border-color: #333;
+}
+/* 選択中の色ボタンを目立たせる */
+.color-item.selected {
+    border: 2px solid #333 !important; /* 黒い太枠 */
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+/* 履歴のヘッダー（文字とゴミ箱） */
+.palette-header {
+    display: flex;
+    justify-content: space-between; /* 両端に配置 */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 0 5px; /* 端に寄りすぎないように */
+    box-sizing: border-box;
+}
+
+/* ラベル（既存の調整） */
+.palette-label {
+    font-size: 11px;
+    color: #666;
+    font-weight: bold;
+    margin: 0; /* マージンは親で管理するので0に */
+}
+
+/* ゴミ箱ボタン */
+#clear-history-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.2s;
+}
+
+#clear-history-btn:hover {
+    color: #ff4d4d; /* ホバー時に赤くする */
+    background-color: #fff0f0;
+}
+
+.canvas-container {
+    flex: 1;
+    overflow: auto;
+    background: #fdfaf5;
+    position: relative;
+    cursor: grab;
+}
+#canvas-viewport {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    overflow: visible;
+}
+#knitting-canvas {
+    transform-origin: center center;
+    transform: scale(1) translate(0px, 0px);
+    transition: transform 0.1s ease-out;
+    background: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    margin: 20px;
+}
+
+.mode-chain {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.knit-row {
+    display: flex;
+    justify-content: center;
+}
+.cell {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    background: white;
+    box-sizing: border-box;
+}
+.cell.active {
+    border: 2px solid #e50012;
+    z-index: 10;
+}
+
+.tools {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.start-btn {
+    color: white;
+    background-color: #333;
+    border: white solid 1px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.tool-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border: none;
+    cursor: pointer;
+}
+.tool-btn svg {
+    width: 18px;
+    height: 18px;
+}
+/* 範囲選択されたマス */
+.cell.selected {
+    background-color: rgba(87, 165, 255, 0.438) !important; /* 薄い青色 */
+    border: 1px solid #0056b3;
+}

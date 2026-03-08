@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 
 pin "dropdown"
 pin "tab"
+pin "knitting_editor"

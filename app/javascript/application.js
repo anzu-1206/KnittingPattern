@@ -4,5 +4,6 @@ import "controllers"
 
 import "dropdown"
 import "tab"
+import "knitting_editor"
 
 //= require rails-ujs
