@@ -44,23 +44,23 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_28_094506) do
     t.integer "grid_width"
     t.integer "grid_height"
     t.text "pattern_data"
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "patterns", force: :cascade do |t|
-    t.string "name"
+    t.integer "user_id", null: false
+    t.string "title"
     t.string "introduction"
-    t.string "item"
-    t.string "yarn"
-    t.string "crochet"
-    t.string "knitting"
-    t.string "hook"
+    t.text "pattern_data", null: false
+    t.integer "grid_width", default: 20
+    t.integer "grid_height", default: 20
     t.boolean "is_public"
     t.integer "category"
-    t.integer "difficulty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_patterns_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -86,4 +86,5 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_28_094506) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "patterns", "users"
 end

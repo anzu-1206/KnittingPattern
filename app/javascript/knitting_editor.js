@@ -138,10 +138,19 @@ $(document).on('turbo:load', function() {
         if (patternData.length === 0) return;
         const title = prompt("タイトルを入力", "わたしの編み図");
         if (!title) return;
+        const width = patternData[0].length;
+        const height = patternData.length;
         $.ajax({
             url: '/makepatterns',
             method: 'POST',
-            data: { pattern: { title: title, start_type: 0, data: JSON.stringify(patternData) } },
+            data: { 
+                makepattern: { 
+                    start_type: "0",
+                    grid_width: width,
+                    grid_height: height,
+                    pattern_data: JSON.stringify(patternData)
+                } 
+            },
             headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
             success: function() { alert("保存しました"); },
             error: function() { alert("保存失敗"); }

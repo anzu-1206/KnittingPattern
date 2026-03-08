@@ -1,16 +1,16 @@
 class CreatePatterns < ActiveRecord::Migration[7.2]
   def change
     create_table :patterns do |t|
-      t.string :name
+      t.references :user, null: false, foreign_key: true
+      t.string :title
       t.string :introduction
-      t.string :item
-      t.string :yarn
-      t.string :crochet
-      t.string :knitting
-      t.string :hook
+
+      t.text :pattern_data, null: false
+      t.integer :grid_width, default: 20
+      t.integer :grid_height, default: 20
+
       t.boolean :is_public
       t.integer :category
-      t.integer :difficulty
 
       t.timestamps
     end
