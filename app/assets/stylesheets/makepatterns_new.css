@@ -21,25 +21,22 @@
     flex: 1;
     overflow: hidden;
 }
-/* サイドバー全体 */
 .symbol-palette {
     display: flex;
     flex-direction: column;
-    width: 90px; /* 少し広げました */
+    width: 90px;
     background: #fff;
     border-right: 1px solid #ddd;
-    padding: 0; /* パディングは内部で調整 */
+    padding: 0;
     height: 100%;
 }
 
-/* タブボタンエリア */
 .sidebar-tabs {
     display: flex;
     width: 100%;
     border-bottom: 1px solid #ddd;
 }
 
-/* タブボタン */
 .tab-btn {
     flex: 1;
     border: none;
@@ -50,7 +47,6 @@
     color: #666;
     border-bottom: 2px solid transparent;
 }
-/* アクティブなタブ */
 .tab-btn.active {
     background: #fff;
     color: #333;
@@ -58,21 +54,18 @@
     border-bottom: 2px solid #333;
 }
 
-/* タブの中身（共通） */
 .tab-content {
-    display: none; /* デフォルトは非表示 */
+    display: none;
     padding: 10px;
     flex: 1;
     overflow-y: auto;
     width: 100%;
     box-sizing: border-box;
 }
-/* アクティブな中身だけ表示 */
 .tab-content.active {
     display: block;
 }
 
-/* 設定エリアのスタイル */
 .setting-group {
     margin-bottom: 15px;
 }
@@ -95,7 +88,6 @@
     background: #ddd;
 }
 
-/* 各セクション（ピッカー、履歴） */
 .palette-section {
     width: 100%;
     display: flex;
@@ -103,8 +95,6 @@
     align-items: center;
     margin-bottom: 10px;
 }
-
-/* ラベル文字 */
 .palette-label {
     font-size: 11px;
     color: #666;
@@ -112,18 +102,16 @@
     font-weight: bold;
     text-align: center;
 }
-
-/* ピッカーとボタンを包む枠 */
 .picker-wrapper {
     display: flex;
-    flex-direction: column; /* 縦に積む */
+    flex-direction: column;
     gap: 8px;
     width: 100%;
 }
 
 /* カラーピッカー本体 */
 input[type="color"]#color-picker {
-    width: 100%;   /* 親の幅いっぱいに */
+    width: 100%;
     height: 40px;
     padding: 0;
     border: 1px solid #ccc;
@@ -141,7 +129,6 @@ input[type="color"]::-webkit-color-swatch {
     border-radius: 3px;
 }
 
-/* 決定（追加）ボタン */
 #confirm-color-btn {
     width: 100%;
     height: 30px;
@@ -157,26 +144,22 @@ input[type="color"]::-webkit-color-swatch {
     background-color: #555;
 }
 
-/* 区切り線 */
 .palette-divider {
     width: 80%;
     height: 1px;
     background-color: #eee;
     margin: 15px 0;
 }
-
-/* 履歴リストエリア */
 .history-list {
     display: flex;
-    flex-wrap: wrap; /* 折り返し */
+    flex-wrap: wrap;
     justify-content: center;
     gap: 5px;
     width: 100%;
 }
 
-/* 履歴に追加されるボタン（.color-item）のスタイル */
 .color-item {
-    width: 24px;   /* 少し小さめにしてたくさん入るように */
+    width: 24px;
     height: 24px;
     border: 1px solid rgba(0,0,0,0.1);
     border-radius: 3px;
@@ -187,30 +170,26 @@ input[type="color"]::-webkit-color-swatch {
     transform: scale(1.1);
     border-color: #333;
 }
-/* 選択中の色ボタンを目立たせる */
 .color-item.selected {
-    border: 2px solid #333 !important; /* 黒い太枠 */
+    border: 2px solid #333 !important;
     transform: scale(1.1);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     z-index: 1;
 }
-/* 履歴のヘッダー（文字とゴミ箱） */
 .palette-header {
     display: flex;
-    justify-content: space-between; /* 両端に配置 */
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-bottom: 5px;
-    padding: 0 5px; /* 端に寄りすぎないように */
+    padding: 0 5px;
     box-sizing: border-box;
 }
-
-/* ラベル（既存の調整） */
 .palette-label {
     font-size: 11px;
     color: #666;
     font-weight: bold;
-    margin: 0; /* マージンは親で管理するので0に */
+    margin: 0;
 }
 
 /* ゴミ箱ボタン */
@@ -228,7 +207,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 #clear-history-btn:hover {
-    color: #ff4d4d; /* ホバー時に赤くする */
+    color: #e50012;
     background-color: #fff0f0;
 }
 
@@ -243,8 +222,6 @@ input[type="color"]::-webkit-color-swatch {
     width: 100%;
     height: 100%;
     display: flex;
-    /* align-items: center;
-    justify-content: center; */
     overflow: visible;
 }
 #knitting-canvas {
@@ -303,8 +280,8 @@ input[type="color"]::-webkit-color-swatch {
     width: 18px;
     height: 18px;
 }
-/* 範囲選択されたマス */
+
 .cell.selected {
-    background-color: rgba(87, 165, 255, 0.438) !important; /* 薄い青色 */
+    background-color: rgba(87, 165, 255, 0.438) !important;
     border: 1px solid #0056b3;
 }
