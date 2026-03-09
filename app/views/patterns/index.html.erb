@@ -10,7 +10,7 @@
                     <li class="pattern">
                         <%= image_tag pattern.image, class: "pattern-image" if pattern.image.attached? %>
                         <div class="pattern-details">
-                            <p class="pattern-name"><%= pattern.name %></p>
+                            <p class="pattern-title"><%= pattern.title %></p>
                             <p class="pattern-category"><%= pattern.category %></p>
                             <p class="pattern-instruction"><%= pattern.introduction %></p>
                             <%= link_to "詳細はこちら", patterns_index_path, :class =>"to-detail" %>

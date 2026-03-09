@@ -6,9 +6,9 @@ class PatternsController < ApplicationController
   def create
     @pattern = current_user.patterns.build(pattern_params)
     if @pattern.save
-      render json: { status: 'success' }
+      render json: { status: 'success', redirect_url: patterns_path }
     else
-      render json: { status: 'error' }, status: 422
+      render json: { status: 'error', errors: @pattern.errors.full_messages }, status: 422
     end
   end
 
@@ -19,7 +19,7 @@ class PatternsController < ApplicationController
   private
   def pattern_params
     params.require(:pattern).permit(
-      :name, :introduction, 
+      :title, :introduction, 
       :pattern_data, :grid_width, :grid_height, 
       :is_public, :category
     )

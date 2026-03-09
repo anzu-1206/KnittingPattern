@@ -134,29 +134,55 @@ $(document).on('turbo:load', function() {
         renderCanvas();
     });
 
+
     $('#save-btn').on('click', function() {
         if (patternData.length === 0) return;
         const title = prompt("タイトルを入力", "わたしの編み図");
         if (!title) return;
+        
         const width = patternData[0].length;
         const height = patternData.length;
+
         $.ajax({
             url: '/patterns',
             method: 'POST',
             data: { 
                 pattern: { 
-                    name: title,
-                    grid_width: width,
-                    grid_height: height,
+                    title: title, 
+                    grid_width: width, 
+                    grid_height: height, 
                     pattern_data: JSON.stringify(patternData),
                     is_public: false
                 } 
             },
             headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
-            success: function() { alert("保存しました"); },
-            error: function() { alert("保存失敗"); }
+            
+            // ★ここを修正！ 引数(response)を受け取るようにします
+            success: function(response) { 
+                alert("保存しました");
+                
+                // ★追加！ Railsから送られてきたURLに移動する
+                if (response.redirect_url) {
+                    window.location.href = response.redirect_url;
+                } else {
+                    // 万が一URLがなかった場合の保険（直接指定）
+                    window.location.href = '/patterns';
+                }
+            },
+            
+            error: function(xhr) { 
+                // Railsから送られたエラーメッセージを取得
+                const response = xhr.responseJSON;
+                if (response && response.errors) {
+                    // "Categoryを入力してください" などの具体的な理由が出る
+                    alert("保存失敗: " + response.errors.join(", "));
+                } else {
+                    alert("保存失敗: サーバーエラーが発生しました");
+                }
+            }
         });
     });
+
 
     $('#reset-btn').on('click', function() {
         if (confirm("リセットしますか？")) {
@@ -266,10 +292,12 @@ $(document).on('turbo:load', function() {
         reader.readAsDataURL(file);
     });
 
+
     $('#gauge-ratio').on('input', function() {
         const ratio = $(this).val();
         $('.cell').css('height', (25 * ratio) + 'px');
     });
+
 
     $(document).on('keydown', function(e) {
         if (patternData.length === 0) return;
