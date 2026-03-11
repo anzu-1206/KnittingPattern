@@ -16,6 +16,8 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <%= javascript_importmap_tags %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -47,6 +49,7 @@
                 </button>
                 <div class="index-dropdown-contents" id="IndexDropdownContents">
                   <ul class="dropdown-ul">
+                    <li class="dropdown-menu"><%=link_to "▸ パターン作成", makepatterns_new_path, :class => "log" %></li>
                     <li class="dropdown-menu"><%=link_to "▸ パターン一覧", patterns_index_path, :class => "log" %></li>
                     <li class="dropdown-menu"><%=link_to "▸ アカウント設定", account_setting_user_session_path, :class => "log" %></li>
                     <li class="dropdown-menu"><%= link_to "▸ ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, :class => "log" %></li>

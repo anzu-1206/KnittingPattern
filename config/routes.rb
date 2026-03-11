@@ -2,12 +2,15 @@ Rails.application.routes.draw do
   root to: "makepatterns#index"
 
   get "makepatterns/index"
+  get "makepatterns/new"
   get "makepatterns/aboutme"
 
   get "posts/index"
 
   get "patterns/index"
   
+  resources :patterns
+
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
