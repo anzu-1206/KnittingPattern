@@ -156,25 +156,20 @@ $(document).on('turbo:load', function() {
                 } 
             },
             headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
-            
-            // ★ここを修正！ 引数(response)を受け取るようにします
+
             success: function(response) { 
                 alert("保存しました");
-                
-                // ★追加！ Railsから送られてきたURLに移動する
+
                 if (response.redirect_url) {
                     window.location.href = response.redirect_url;
                 } else {
-                    // 万が一URLがなかった場合の保険（直接指定）
                     window.location.href = '/patterns';
                 }
             },
             
             error: function(xhr) { 
-                // Railsから送られたエラーメッセージを取得
                 const response = xhr.responseJSON;
                 if (response && response.errors) {
-                    // "Categoryを入力してください" などの具体的な理由が出る
                     alert("保存失敗: " + response.errors.join(", "));
                 } else {
                     alert("保存失敗: サーバーエラーが発生しました");
