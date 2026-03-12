@@ -8,6 +8,14 @@ $(document).on('turbo:load', function() {
     const $canvas = $('#knitting-canvas');
     const $viewport = $('#canvas-viewport');
 
+    if (window.AppConfig && window.AppConfig.initialData && window.AppConfig.initialData.length > 0) {
+        patternData = window.AppConfig.initialData;
+        currentRow = 0;
+        currentCell = 0;
+        renderCanvas();
+    }
+
+
     $('#start-btn').on('click', function() {
         const count = prompt("作り目の数は？（半角数字）", "20");
         if (count && !isNaN(count)) {
@@ -86,7 +94,6 @@ $(document).on('turbo:load', function() {
         $('#recent-colors').append($btn);
     });
 
-
     $(document).on('click', '.color-item', function() {
         $('.color-item').removeClass('selected');
         $(this).addClass('selected');
@@ -113,7 +120,6 @@ $(document).on('turbo:load', function() {
         }
     });
 
-
     $('#undo-btn').on('click', function() {
         if (patternData.length === 0) return;
         if (!patternData[currentRow][currentCell].color) {
@@ -135,45 +141,58 @@ $(document).on('turbo:load', function() {
     });
 
 
-    $('#save-btn').on('click', function() {
+    $('#save-btn').off('click').on('click', function() {
         if (patternData.length === 0) return;
-        const title = prompt("タイトルを入力", "わたしの編み図");
+
+        const defaultTitle = (window.AppConfig && window.AppConfig.initialTitle) ? window.AppConfig.initialTitle : "わたしの編み図";
+        const title = prompt("タイトルを入力", defaultTitle);
         if (!title) return;
         
         const width = patternData[0].length;
         const height = patternData.length;
 
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const cellSize = 10;
+        canvas.width = width * cellSize;
+        canvas.height = height * cellSize;
+
+        for (let y = 0; y < height; y++) {
+            const savedRowIndex = (height - 1) - y;
+            const row = patternData[savedRowIndex];
+            for (let x = 0; x < width; x++) {
+                ctx.fillStyle = row[x].color || 'transparent';
+                ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+            }
+        }
+        
+        const imageDataUrl = canvas.toDataURL('image/png');
+
+        const saveUrl = (window.AppConfig && window.AppConfig.saveUrl) ? window.AppConfig.saveUrl : '/patterns';
+        const saveMethod = (window.AppConfig && window.AppConfig.saveMethod) ? window.AppConfig.saveMethod : 'POST';
+
         $.ajax({
-            url: '/patterns',
-            method: 'POST',
+            url: saveUrl,
+            method: saveMethod,
             data: { 
                 pattern: { 
                     title: title, 
                     grid_width: width, 
                     grid_height: height, 
                     pattern_data: JSON.stringify(patternData),
-                    is_public: false
+                    is_public: false,
+                    image_data: imageDataUrl 
                 } 
             },
             headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
-
             success: function(response) { 
                 alert("保存しました");
-
                 if (response.redirect_url) {
                     window.location.href = response.redirect_url;
-                } else {
-                    window.location.href = '/patterns';
                 }
             },
-            
             error: function(xhr) { 
-                const response = xhr.responseJSON;
-                if (response && response.errors) {
-                    alert("保存失敗: " + response.errors.join(", "));
-                } else {
-                    alert("保存失敗: サーバーエラーが発生しました");
-                }
+                alert("保存に失敗しました");
             }
         });
     });
@@ -208,7 +227,6 @@ $(document).on('turbo:load', function() {
         if(confirm('この色を削除しますか？')) $(this).remove();
         return false;
     });
-
 
     $('.tab-btn').on('click', function() {
         $('.tab-btn').removeClass('active');
@@ -292,7 +310,6 @@ $(document).on('turbo:load', function() {
         const ratio = $(this).val();
         $('.cell').css('height', (25 * ratio) + 'px');
     });
-
 
     $(document).on('keydown', function(e) {
         if (patternData.length === 0) return;
