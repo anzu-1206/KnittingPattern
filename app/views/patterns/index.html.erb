@@ -1,27 +1,50 @@
 <%= stylesheet_link_tag "patterns_index", "data-turbo-track": "reload" %>
 
-<body>
-    <div class="patterns-index">
-        <h3 class="title">パターン一覧</h3>
-
-        <div class="pattern-container">
-            <ul class="pattern-list">
-                <% @patterns.each do |pattern| %>
-                    <li class="pattern">
-                        <%= image_tag pattern.image, class: "pattern-image" if pattern.image.attached? %>
-                        <div class="pattern-details">
-                            <p class="pattern-title"><%= pattern.title %></p>
-                            <p class="pattern-category"><%= pattern.category %></p>
-                            <p class="pattern-instruction"><%= pattern.introduction %></p>
-                            <%= link_to "詳細はこちら", patterns_index_path, :class =>"to-detail" %>
-                        </div>
-                    </li>
-                <% end %>
-            </ul>
-        </div>
+<div class="dashboard-container">
+    <div class="header-section">
+        <h1>My Patterns</h1>
+        <%= link_to "+ New Pattern", new_pattern_path, class: "new-pattern-btn-header" %>
     </div>
-</body>
 
-<h1></h1>
-<p></p>
-<div></div>
+    <%= search_form_for @q do |f| %>
+        <%= f.search_field :title_cont, placeholder: "タイトルを検索", :class => "search-bar" %>
+        <%= f.submit "検索", :class => "search-btn" %>
+    <% end %>
+
+
+    <div class="patterns-grid">
+
+        <% @patterns.each do |pattern| %>
+        <div class="pattern-card">
+            
+            <div class="card-image">
+                <% if pattern.image.attached? %>
+                    <%= image_tag pattern.image, style: "width: 100%; height: 100%; object-fit: contain;" %>
+                <% else %>
+                    <div class="placeholder-pattern"></div>
+                <% end %>
+                
+                <span class="status-badge">DRAFT</span>
+            </div>
+
+            <div class="card-content">
+                <h3 class="card-title"><%= pattern.title %></h3>
+                
+                <p class="card-meta">
+                    <i class="time-icon">⏰</i> 
+                    <%= pattern.updated_at.to_fs(:datetime_jp) %>
+                </p>
+
+                <div class="card-actions">
+                    <%= link_to "Edit", edit_pattern_path(pattern), class: "btn-edit" %>
+                    <%= link_to "Show", pattern_path(pattern), class: "btn-edit" %>
+                    <%= link_to "🗑", pattern_path(pattern), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn-icon delete" %>
+                </div>
+            </div>
+
+        </div>
+        <% end %>
+
+    </div>
+</div>
+

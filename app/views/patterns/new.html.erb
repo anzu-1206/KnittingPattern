@@ -1,0 +1,89 @@
+<%= stylesheet_link_tag "makepatterns_new", "data-turbo-track": "reload" %>
+
+<script>
+    window.AppConfig = {
+        saveUrl: '/patterns',
+        saveMethod: 'POST',
+        initialTitle: 'わたしの編み図',
+        initialData: []
+    };
+</script>
+
+<div class="editor-wrapper">
+    <div class="editor-toolbar">
+        <div>
+            <button id="start-btn" class="start-btn">Start</button>
+        </div>
+        <div id="row-counter">段目: 1</div>
+        <div class="tools">
+            <button id="next-row-btn" class="tool-btn" title="次の段へ"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="m2.019 11.993c0 5.518 4.48 9.998 9.998 9.998 5.517 0 9.997-4.48 9.997-9.998s-4.48-9.998-9.997-9.998c-5.518 0-9.998 4.48-9.998 9.998zm1.5 0c0-4.69 3.808-8.498 8.498-8.498s8.497 3.808 8.497 8.498-3.807 8.498-8.497 8.498-8.498-3.808-8.498-8.498zm4.715-1.528s1.505-1.502 3.259-3.255c.147-.146.338-.219.53-.219s.384.073.53.219c1.754 1.753 3.259 3.254 3.259 3.254.145.145.217.336.216.527 0 .191-.074.383-.22.53-.293.293-.766.294-1.057.004l-1.978-1.978v6.694c0 .413-.336.75-.75.75s-.75-.337-.75-.75v-6.694l-1.978 1.979c-.29.289-.762.286-1.055-.007-.147-.146-.22-.338-.221-.53-.001-.19.071-.38.215-.524z" fill="white" fill-rule="evenodd"/></svg></button>
+            <button id="undo-btn" class="tool-btn" title="1つ戻る"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.427 3.021h-7.427v-3.021l-6 5.39 6 5.61v-3h7.427c3.071 0 5.561 2.356 5.561 5.427 0 3.071-2.489 5.573-5.561 5.573h-7.427v5h7.427c5.84 0 10.573-4.734 10.573-10.573s-4.733-10.406-10.573-10.406z" fill="white" fill-rule="evenodd"/></svg></button>
+            <button id="redo-btn" class="tool-btn" title="1つ進む"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.573 3.021h7.427v-3.021l6 5.39-6 5.61v-3h-7.427c-3.071 0-5.561 2.356-5.561 5.427 0 3.071 2.489 5.573 5.561 5.573h7.427v5h-7.427c-5.84 0-10.573-4.734-10.573-10.573s4.733-10.406 10.573-10.406z" fill="white" fill-rule="evenodd"/></svg></button>
+            <button id="reset-btn" class="tool-btn" title="リセット"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23"><path d="M23 12c0 1.042-.154 2.045-.425 3h-2.101c.335-.94.526-1.947.526-3 0-4.962-4.037-9-9-9-1.706 0-3.296.484-4.655 1.314l1.858 2.686h-6.994l2.152-7 1.849 2.673c1.684-1.049 3.659-1.673 5.79-1.673 6.074 0 11 4.925 11 11zm-6.354 7.692c-1.357.826-2.944 1.308-4.646 1.308-4.962 0-9-4.038-9-9 0-1.053.191-2.06.525-3h-2.1c-.271.955-.425 1.958-.425 3 0 6.075 4.925 11 11 11 2.127 0 4.099-.621 5.78-1.667l1.853 2.667 2.152-6.989h-6.994l1.855 2.681z" fill="white" fill-rule="evenodd"/></svg></button>
+        </div>
+        <div class="zoom-controls tools">
+            <button id="zoom-out-btn" class="tool-btn" title="拡大"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path fill="white" fill-rule="evenodd" d="m15.97 17.031c-1.479 1.238-3.384 1.985-5.461 1.985-4.697 0-8.509-3.812-8.509-8.508s3.812-8.508 8.509-8.508c4.695 0 8.508 3.812 8.508 8.508 0 2.078-.747 3.984-1.985 5.461l4.749 4.75c.146.146.219.338.219.531 0 .587-.537.75-.75.75-.192 0-.384-.073-.531-.22zm-5.461-13.53c-3.868 0-7.007 3.14-7.007 7.007s3.139 7.007 7.007 7.007c3.866 0 7.007-3.14 7.007-7.007s-3.141-7.007-7.007-7.007zm3.256 6.26h-6.5c-.414 0-.75.336-.75.75s.336.75.75.75h6.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75z" /></svg></button>
+            <span id="zoom-level">100%</span>
+            <button id="zoom-in-btn" class="tool-btn" title="縮小"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m15.97 17.031c-1.479 1.238-3.384 1.985-5.461 1.985-4.697 0-8.509-3.812-8.509-8.508s3.812-8.508 8.509-8.508c4.695 0 8.508 3.812 8.508 8.508 0 2.078-.747 3.984-1.985 5.461l4.749 4.75c.146.146.219.338.219.531 0 .587-.537.75-.75.75-.192 0-.384-.073-.531-.22zm-5.461-13.53c-3.868 0-7.007 3.14-7.007 7.007s3.139 7.007 7.007 7.007c3.866 0 7.007-3.14 7.007-7.007s-3.141-7.007-7.007-7.007zm-.744 6.26h-2.5c-.414 0-.75.336-.75.75s.336.75.75.75h2.5v2.5c0 .414.336.75.75.75s.75-.336.75-.75v-2.5h2.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-2.5v-2.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75z" fill="white" fill-rule="evenodd"/></svg></button>
+            <button id="reset-view-btn" class="tool-btn" title="全体表示"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="m22 5c0-.478-.379-1-1-1h-18c-.62 0-1 .519-1 1v14c0 .621.52 1 1 1h18c.478 0 1-.379 1-1zm-1.5 13.5h-17v-13h17zm-6.065-9.978-5.917 5.921v-1.243c0-.414-.336-.75-.75-.75-.415 0-.75.336-.75.75v3.05c0 .414.335.75.75.75h3.033c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-1.219l5.918-5.922v1.244c0 .414.336.75.75.75s.75-.336.75-.75c0-.715 0-2.335 0-3.05 0-.414-.336-.75-.75-.75-.715 0-2.318 0-3.033 0-.414 0-.75.336-.75.75s.336.75.75.75z" fill="white" fill-rule="evenodd"/></svg></button>
+        </div>
+        <div class="tools">
+            <button id="save-btn" class="tool-btn" title="保存"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 3h2.996v5h-2.996v-5zm11 1v20h-24v-24h20l4 4zm-17 5h10v-7h-10v7zm15-4.171l-2.828-2.829h-.172v9h-14v-9h-3v20h20v-17.171zm-3 10.171h-14v1h14v-1zm0 2h-14v1h14v-1zm0 2h-14v1h14v-1z" fill="white" fill-rule="evenodd"/></svg></button>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <div class="symbol-palette">
+            <div class="sidebar-tabs">
+                <button class="tab-btn active" data-target="#tab-palette">色</button>
+                <button class="tab-btn" data-target="#tab-settings">設定</button>
+            </div>
+
+            <div id="tab-palette" class="tab-content active">
+                <div class="palette-section">
+                    <label for="color-picker" class="palette-label">色を作る</label>
+                    <div class="picker-wrapper">
+                        <button id="confirm-color-btn">追加</button>
+                        <input type="color" id="color-picker" value="#ff0000">
+                    </div>
+                </div>
+                <div class="palette-divider"></div>
+                <div class="palette-section">
+                    <div class="palette-header">
+                        <span class="palette-label">履歴</span>
+                        <button id="clear-history-btn" title="履歴を全て削除">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                    <div id="recent-colors" class="history-list"></div>
+                </div>
+            </div>
+
+            <div id="tab-settings" class="tab-content">
+                
+                <div class="setting-group">
+                    <p class="setting-label">画像から作成</p>
+                    <input type="file" id="import-image" accept="image/*" style="display: none;">
+                    <button id="import-btn" class="setting-btn">画像を読み込む</button>
+                </div>
+
+                <div class="palette-divider"></div>
+
+                <div class="setting-group">
+                    <p class="setting-label">目の比率 (ゲージ)</p>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-size: 10px;">横長</span>
+                        <span style="font-size: 10px;">縦長</span>
+                    </div>
+                    <input type="range" id="gauge-ratio" min="0.5" max="1.5" step="0.1" value="1.0" style="width: 100%;">
+                </div>
+
+            </div>
+        </div>
+
+        <main class="canvas-container">
+            <div id="knitting-canvas" class="mode-chain">
+            </div>
+        </main>
+    </div>
+</div>

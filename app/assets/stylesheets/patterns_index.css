@@ -1,11 +1,154 @@
-.patterns-index {
-    padding: 50px 100px;
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
-.title {
-    font-size: 24px;
-    font-weight: 700;
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
-.pattern-list {
-    padding-left: 0;
-    list-style: none;
+.header-section h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+}
+.new-pattern-btn-header {
+    background-color: #e50012;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.search-bar {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    margin-right: 5px;
+    margin-bottom: 30px;
+}
+.search-btn {
+    background-color: #e50012;
+    border: none;
+    color: white;
+    text-align: center;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.filter-pills {
+    display: flex;
+    gap: 10px;
+}
+.pill {
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.pill.active {
+    background-color: #fdeff2;
+    border-color: #e50012;
+    color: #e50012;
+}
+
+.patterns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.pattern-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #eee;
+}
+.pattern-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    height: 180px;
+    background-color: #fdeff2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.placeholder-pattern {
+    width: 80%;
+    height: 60%;
+    background-image: radial-gradient(#e50012 20%, transparent 20%);
+    background-size: 20px 20px;
+    opacity: 0.2;
+}
+.status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #fdeff2;
+    color: #e50012;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.card-content {
+    padding: 15px;
+}
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    color: #333;
+}
+.card-meta {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 15px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+}
+.btn-edit {
+    flex: 1;
+    background-color: #e50012;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+.btn-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    color: #666;
+    text-decoration: none;
+}
+.btn-icon:hover {
+    background-color: #fee;
+    color: red;
 }

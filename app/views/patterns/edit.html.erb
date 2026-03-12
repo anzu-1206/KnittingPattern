@@ -1,5 +1,14 @@
 <%= stylesheet_link_tag "makepatterns_new", "data-turbo-track": "reload" %>
 
+<script>
+    window.AppConfig = {
+        saveUrl: '<%= pattern_path(@pattern) %>',
+        saveMethod: 'PATCH',
+        initialTitle: '<%= j @pattern.title %>',
+        initialData: <%= raw @pattern.pattern_data.presence || '[]' %>
+    };
+</script>
+
 <div class="editor-wrapper">
     <div class="editor-toolbar">
         <div>
