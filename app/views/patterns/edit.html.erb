@@ -5,6 +5,7 @@
         saveUrl: '<%= pattern_path(@pattern) %>',
         saveMethod: 'PATCH',
         initialTitle: '<%= j @pattern.title %>',
+        initialIntro: '<%= j @pattern.introduction %>',
         initialData: <%= raw @pattern.pattern_data.presence || '[]' %>
     };
 </script>
@@ -61,13 +62,27 @@
 
             <div id="tab-settings" class="tab-content">
                 
+                <%= form_with model: @pattern, local: true do |f| %>
+
+                <div class="setting-group">
+                    <%= f.label :title ,"タイトル", :class =>"setting-label" %>
+                    <%= f.text_field :title, placeholder: "作品のタイトル", value: "わたしの編み図", :class => "setting-input", :id => "input-title" %>
+                </div>
+                
+                <div class="setting-group">
+                    <%= f.label :introduction ,"メモ・説明", :class =>"setting-label" %>
+                    <%= f.text_area :introduction, placeholder: "使用した毛糸や針のサイズ、編み方のポイントなど...", :class => "setting-input", :id => "input-intro" %>
+                </div>
+
+                <% end %>
+
+                <div class="palette-divider"></div>
+
                 <div class="setting-group">
                     <p class="setting-label">画像から作成</p>
                     <input type="file" id="import-image" accept="image/*" style="display: none;">
                     <button id="import-btn" class="setting-btn">画像を読み込む</button>
                 </div>
-
-                <div class="palette-divider"></div>
 
                 <div class="setting-group">
                     <p class="setting-label">目の比率 (ゲージ)</p>
