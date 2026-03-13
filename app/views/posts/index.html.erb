@@ -9,10 +9,12 @@
         </div>
 
         <div class="explore-filters">
-            <div class="search-box">
-                <input type="text" placeholder="作品名や作者名で検索..." class="search-input">
-                <button class="search-btn">検索</button>
-            </div>
+            <%= search_form_for @q do |f| %>
+                <div class="search-box">
+                    <%= f.search_field :title_cont, placeholder: "作品名や作者名で検索...", :class => "search-input" %>
+                    <%= f.submit "検索", :class => "search-btn" %>
+                </div>
+            <% end %>
             <div class="category-pills">
                 <span class="pill active">すべて</span>
                 <span class="pill"></span>
@@ -39,7 +41,6 @@
                 <span class="explore-category-badge"><%= pattern.category || "未分類" %></span>
 
                 <div class="card-overlay-actions">
-                    <button class="action-icon-btn like" title="いいね">❤️</button>
                     <button class="action-icon-btn save" title="保存">🔖</button>
                 </div>
             </div>
@@ -52,9 +53,9 @@
                 <div class="explore-card-meta">
                     <div class="author-info">
                         <div class="author-avatar">👤</div>
-                        <span class="author-name"><%= pattern.user&.nickname || "名無しさん" %></span>
+                        <span class="author-name"><%= pattern.user&.name || "名無しさん" %></span>
                     </div>
-                    <span class="post-date"><%= pattern.created_at.to_fs(:datetime_jp) %>前</span>
+                    <span class="post-date"><%= pattern.created_at.to_fs(:datetime_jp) %></span>
                 </div>
             </div>
 

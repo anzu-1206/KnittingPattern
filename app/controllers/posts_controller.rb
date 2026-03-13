@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
   def index
-    @public_patterns = Pattern.where(is_public: true).order(created_at: :desc)
+    @public_patterns = Pattern.published
+
+    @q = Pattern.ransack(params[:q])
+    @patterns = @q.result(distinct: true)
   end
 end

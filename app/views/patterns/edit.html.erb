@@ -6,6 +6,7 @@
         saveMethod: 'PATCH',
         initialTitle: '<%= j @pattern.title %>',
         initialIntro: '<%= j @pattern.introduction %>',
+        initialIsPublic: <%= @pattern.is_public %>,
         initialData: <%= raw @pattern.pattern_data.presence || '[]' %>
     };
 </script>
@@ -75,6 +76,18 @@
                 </div>
 
                 <% end %>
+
+                <div class="setting-group">
+                    <p class="setting-label">公開設定</p>
+                    <div style="margin-bottom: 5px;">
+                        <input type="radio" id="public-true" name="is_public_radio" value="true">
+                        <label for="public-true" style="font-size: 12px; cursor: pointer;">公開（みんなの投稿に表示）</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="public-false" name="is_public_radio" value="false" checked>
+                        <label for="public-false" style="font-size: 12px; cursor: pointer;">非公開（自分のみ）</label>
+                    </div>
+                </div>
 
                 <div class="palette-divider"></div>
 

@@ -16,6 +16,14 @@ $(document).on('turbo:load', function() {
             $('#input-intro').val(window.AppConfig.initialIntro);
         }
 
+        if (window.AppConfig.hasOwnProperty('initialIsPublic')) {
+            if (window.AppConfig.initialIsPublic === true) {
+                $('#public-true').prop('checked', true);
+            } else {
+                $('#public-false').prop('checked', true);
+            }
+        }
+
         if (window.AppConfig.initialData && window.AppConfig.initialData.length > 0) {
             patternData = window.AppConfig.initialData;
             currentRow = 0;
@@ -155,6 +163,8 @@ $(document).on('turbo:load', function() {
 
         const title = $('#input-title').val().trim() || "無題の編み図";
         const intro = $('#input-intro').val().trim();
+
+        const isPublicChecked = $('input[name="is_public_radio"]:checked').val() === 'true';
         
         const width = patternData[0].length;
         const height = patternData.length;
@@ -189,7 +199,7 @@ $(document).on('turbo:load', function() {
                     grid_width: width, 
                     grid_height: height, 
                     pattern_data: JSON.stringify(patternData),
-                    is_public: false,
+                    is_public: isPublicChecked,
                     image_data: imageDataUrl 
                 } 
             },

@@ -84,6 +84,10 @@
     color: #666;
     background: #fafafa;
 }
+.public {
+    color: #e50012;
+    font-weight: bold;
+}
 .introduction-box {
     background: #fdfdfd;
     border: 1px solid #eee;
