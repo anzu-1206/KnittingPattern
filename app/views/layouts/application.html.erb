@@ -31,8 +31,7 @@
       <a href="/makepatterns/index"><img class="header-logo" src="">Ami-Labo（仮）</a>
       <div class="header-container">
         <ul class="header-contents">
-          <li><%=link_to "投稿ページ", makepatterns_index_path, :class => "head-link" %></li>
-          <li><%=link_to "お問い合わせ", makepatterns_index_path, :class => "head-link" %></li>
+          <li><%=link_to "みんなの編み図", posts_path, :class => "head-link" %></li>
           <li><%=link_to "作者について", makepatterns_aboutme_path, :class => "head-link" %></li>
           <li>
             <% if user_signed_in? %>
@@ -49,7 +48,7 @@
                 </button>
                 <div class="index-dropdown-contents" id="IndexDropdownContents">
                   <ul class="dropdown-ul">
-                    <li class="dropdown-menu"><%=link_to "▸ パターン作成", makepatterns_new_path, :class => "log" %></li>
+                    <li class="dropdown-menu"><%=link_to "▸ パターン作成", new_pattern_path, :class => "log" %></li>
                     <li class="dropdown-menu"><%=link_to "▸ パターン一覧", patterns_index_path, :class => "log" %></li>
                     <li class="dropdown-menu"><%=link_to "▸ アカウント設定", account_setting_user_session_path, :class => "log" %></li>
                     <li class="dropdown-menu"><%= link_to "▸ ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, :class => "log" %></li>
