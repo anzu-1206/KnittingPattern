@@ -37,7 +37,7 @@
         <h3>メモ・説明</h3>
         <div class="introduction-box">
             <% if @pattern.introduction.present? %>
-            <%= simple_format(@pattern.introduction) %>
+            <%= @pattern.introduction %>
             <% else %>
             <p class="text-muted">メモはまだ書かれていません。</p>
             <% end %>

@@ -8,11 +8,20 @@ $(document).on('turbo:load', function() {
     const $canvas = $('#knitting-canvas');
     const $viewport = $('#canvas-viewport');
 
-    if (window.AppConfig && window.AppConfig.initialData && window.AppConfig.initialData.length > 0) {
-        patternData = window.AppConfig.initialData;
-        currentRow = 0;
-        currentCell = 0;
-        renderCanvas();
+    if (window.AppConfig) {
+        if (window.AppConfig.initialTitle) {
+            $('#input-title').val(window.AppConfig.initialTitle);
+        }
+        if (window.AppConfig.initialIntro) {
+            $('#input-intro').val(window.AppConfig.initialIntro);
+        }
+
+        if (window.AppConfig.initialData && window.AppConfig.initialData.length > 0) {
+            patternData = window.AppConfig.initialData;
+            currentRow = 0;
+            currentCell = 0;
+            renderCanvas();
+        }
     }
 
 
@@ -144,9 +153,8 @@ $(document).on('turbo:load', function() {
     $('#save-btn').off('click').on('click', function() {
         if (patternData.length === 0) return;
 
-        const defaultTitle = (window.AppConfig && window.AppConfig.initialTitle) ? window.AppConfig.initialTitle : "わたしの編み図";
-        const title = prompt("タイトルを入力", defaultTitle);
-        if (!title) return;
+        const title = $('#input-title').val().trim() || "無題の編み図";
+        const intro = $('#input-intro').val().trim();
         
         const width = patternData[0].length;
         const height = patternData.length;
@@ -177,6 +185,7 @@ $(document).on('turbo:load', function() {
             data: { 
                 pattern: { 
                     title: title, 
+                    introduction: intro,
                     grid_width: width, 
                     grid_height: height, 
                     pattern_data: JSON.stringify(patternData),
