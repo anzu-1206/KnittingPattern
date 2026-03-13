@@ -22,6 +22,8 @@ Rails.application.config.assets.precompile += %w( makepatterns_aboutme.css )
 Rails.application.config.assets.precompile += %w( patterns_index.css )
 Rails.application.config.assets.precompile += %w( patterns_show.css )
 
+Rails.application.config.assets.precompile += %w( posts_index.css )
+
 Rails.application.config.assets.precompile += %w( sessions_new.css )
 Rails.application.config.assets.precompile += %w( sessions_account_setting.css )
 Rails.application.config.assets.precompile += %w( users_new.css )
