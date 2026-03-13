@@ -1,0 +1,53 @@
+<%= stylesheet_link_tag "patterns_show", "data-turbo-track": "reload" %>
+
+<div class="pattern-detail-container">
+
+    <div class="detail-header">
+        <h1><%= @pattern.title %></h1>
+        <div class="detail-meta">
+        <span class="badge"><%= @pattern.category || "未分類" %></span>
+        <span class="date">最終更新: <%= @pattern.updated_at.to_fs(:datetime_jp) %></span>
+        </div>
+    </div>
+
+    <div class="detail-content">
+        
+        <div class="detail-image-box">
+        <% if @pattern.image.attached? %>
+            <%= image_tag @pattern.image, class: "detail-image" %>
+        <% else %>
+            <div class="placeholder-pattern-large">No Image</div>
+        <% end %>
+        </div>
+
+        <div class="detail-info-box">
+        
+        <h3>編み図の情報</h3>
+        <table class="info-table">
+            <tr>
+            <th>サイズ</th>
+            <td>横 <%= @pattern.grid_width %> 目 × 縦 <%= @pattern.grid_height %> 段</td>
+            </tr>
+            <tr>
+            <th>公開設定</th>
+            <td><%= @pattern.is_public ? "公開" : "非公開（自分のみ）" %></td>
+            </tr>
+        </table>
+
+        <h3>メモ・説明</h3>
+        <div class="introduction-box">
+            <% if @pattern.introduction.present? %>
+            <%= @pattern.introduction %>
+            <% else %>
+            <p class="text-muted">メモはまだ書かれていません。</p>
+            <% end %>
+        </div>
+
+        <div class="detail-actions">
+            <%= link_to "← 一覧に戻る", patterns_path, class: "btn-back" %>
+            <%= link_to "編み図を編集する", edit_pattern_path(@pattern), class: "btn-edit-large" %>
+        </div>
+
+        </div>
+    </div>
+</div>

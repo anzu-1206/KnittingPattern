@@ -137,6 +137,10 @@
     font-size: 14px;
     font-weight: bold;
 }
+.btn-edit:hover {
+    background: #ba2636;
+    color: #fff;
+}
 .btn-icon {
     width: 36px;
     height: 36px;

@@ -283,3 +283,20 @@ input[type="color"]::-webkit-color-swatch {
     background-color: rgba(87, 165, 255, 0.438) !important;
     border: 1px solid #0056b3;
 }
+
+.setting-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 12px;
+    font-family: inherit;
+}
+textarea.setting-input {
+    resize: vertical;
+}
+.setting-input:focus {
+    outline: none;
+    border-color: #e50012;
+}
