@@ -24,13 +24,17 @@
     font-weight: bold;
 }
 
+.search-pills {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
 .search-bar {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     width: 300px;
     margin-right: 5px;
-    margin-bottom: 30px;
 }
 .search-btn {
     background-color: #e50012;
@@ -45,9 +49,10 @@
 .filter-pills {
     display: flex;
     gap: 10px;
+    margin-left: 20px;
 }
 .pill {
-    padding: 10px 20px;
+    padding: 10px 15px;
     background: white;
     border: 1px solid #ddd;
     border-radius: 20px;

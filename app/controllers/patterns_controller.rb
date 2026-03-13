@@ -1,6 +1,12 @@
 class PatternsController < ApplicationController
   def index
-    @q = Pattern.ransack(params[:q])
+    @patterns = current_user.patterns
+
+    if params[:category].present?
+      @patterns = @patterns.where(category: params[:category])
+    end
+
+    @q = @patterns.ransack(params[:q])
     @patterns = @q.result(distinct: true)
   end
 

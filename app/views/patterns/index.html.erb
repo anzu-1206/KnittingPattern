@@ -6,10 +6,23 @@
         <%= link_to "+ New Pattern", new_pattern_path, class: "new-pattern-btn-header" %>
     </div>
 
-    <%= search_form_for @q do |f| %>
-        <%= f.search_field :title_cont, placeholder: "タイトルを検索", :class => "search-bar" %>
-        <%= f.submit "検索", :class => "search-btn" %>
-    <% end %>
+    <%= turbo_frame_tag "patterns-list" do %>
+
+    <div class="search-pills">
+        <%= search_form_for @q do |f| %>
+            <%= f.search_field :title_cont, placeholder: "タイトルを検索", :class => "search-bar" %>
+            <%= f.submit "検索", :class => "search-btn" %>
+        <% end %>
+        <div class="filter-pills">
+            <%= link_to "すべて", patterns_path, class: "pill #{'active' if params[:category].blank?}" %>
+            <%= link_to "キャラクター", patterns_path(category: "キャラクター"), class: "pill #{'active' if params[:category] == 'キャラクター'}" %>
+            <%= link_to "動物・生き物", patterns_path(category: "動物・生き物"), class: "pill #{'active' if params[:category] == '動物・生き物'}" %>
+            <%= link_to "お花・植物", patterns_path(category: "お花・植物"), class: "pill #{'active' if params[:category] == 'お花・植物'}" %>
+            <%= link_to "幾何学・ノルディック", patterns_path(category: "幾何学・ノルディック"), class: "pill #{'active' if params[:category] == '幾何学・ノルディック'}" %>
+            <%= link_to "冬小物", patterns_path(category: "冬小物"), class: "pill #{'active' if params[:category] == '冬小物'}" %>
+            <%= link_to "その他", patterns_path(category: "その他"), class: "pill #{'active' if params[:category] == 'その他'}" %>
+        </div>
+    </div>
 
 
     <div class="patterns-grid">
@@ -52,5 +65,6 @@
         <% end %>
 
     </div>
+    <% end %>
 </div>
 
