@@ -6,6 +6,7 @@
         saveMethod: 'PATCH',
         initialTitle: '<%= j @pattern.title %>',
         initialIntro: '<%= j @pattern.introduction %>',
+        initialCategory: '<%= j @pattern.category %>',
         initialIsPublic: <%= @pattern.is_public %>,
         initialData: <%= raw @pattern.pattern_data.presence || '[]' %>
     };
@@ -62,40 +63,14 @@
             </div>
 
             <div id="tab-settings" class="tab-content">
-                
-                <%= form_with model: @pattern, local: true do |f| %>
-
-                <div class="setting-group">
-                    <%= f.label :title ,"タイトル", :class =>"setting-label" %>
-                    <%= f.text_field :title, placeholder: "作品のタイトル", value: "わたしの編み図", :class => "setting-input", :id => "input-title" %>
-                </div>
-                
-                <div class="setting-group">
-                    <%= f.label :introduction ,"メモ・説明", :class =>"setting-label" %>
-                    <%= f.text_area :introduction, placeholder: "使用した毛糸や針のサイズ、編み方のポイントなど...", :class => "setting-input", :id => "input-intro" %>
-                </div>
-
-                <% end %>
-
-                <div class="setting-group">
-                    <p class="setting-label">公開設定</p>
-                    <div style="margin-bottom: 5px;">
-                        <input type="radio" id="public-true" name="is_public_radio" value="true">
-                        <label for="public-true" style="font-size: 12px; cursor: pointer;">公開（みんなの投稿に表示）</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="public-false" name="is_public_radio" value="false" checked>
-                        <label for="public-false" style="font-size: 12px; cursor: pointer;">非公開（自分のみ）</label>
-                    </div>
-                </div>
-
-                <div class="palette-divider"></div>
 
                 <div class="setting-group">
                     <p class="setting-label">画像から作成</p>
                     <input type="file" id="import-image" accept="image/*" style="display: none;">
                     <button id="import-btn" class="setting-btn">画像を読み込む</button>
                 </div>
+
+                <div class="palette-divider"></div>
 
                 <div class="setting-group">
                     <p class="setting-label">目の比率 (ゲージ)</p>
@@ -113,5 +88,70 @@
             <div id="knitting-canvas" class="mode-chain">
             </div>
         </main>
+    </div>
+</div>
+
+<div id="save-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        
+        <div class="modal-header">
+            <h2>保存・投稿する</h2>
+            <button id="close-modal-btn" class="close-btn">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="modal-preview">
+                <img id="preview-image" src="" alt="プレビュー画像">
+            </div>
+            
+            <%= form_with model: @pattern, local: true do |f| %>
+
+            <div class="modal-form">
+
+                <div class="form-group">
+                    <%= f.label :title ,"タイトル", :class =>"modal-label" %>
+                    <%= f.text_field :title, placeholder: "作品のタイトル", :class => "modal-input", :id => "modal-title" %>
+                </div>
+                
+                <div class="form-group">
+                    <%= f.label :introduction ,"メモ・説明", :class =>"modal-label" %>
+                    <%= f.text_area :introduction, placeholder: "使用した毛糸や針のサイズ、編み方のポイントなど...", :class => "modal-input", :id => "modal-intro" %>
+                </div>
+                
+                <div class="form-group">
+                    <%= f.label :category, "カテゴリー", :class =>"modal-label" %>
+                    <%= f.select :category, 
+                            [
+                            ["キャラクター", "キャラクター"],
+                            ["動物・生き物", "動物・生き物"],
+                            ["お花・植物", "お花・植物"],
+                            ["幾何学・ノルディック", "幾何学・ノルディック"],
+                            ["冬小物", "冬小物"],
+                            ["その他", "その他"]
+                            ], 
+                            { prompt: "選択してください" }, 
+                            { id: "modal-category" } %>
+                </div>
+
+                <div class="form-group">
+                    <p class="modal-label">公開設定</p>
+                    <div class="radio-group">
+                        <input type="radio" id="public-true" name="modal-is-public" value="true">
+                        <label for="public-true" class="public-label">公開（みんなの投稿に表示）</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="public-false" name="modal-is-public" value="false" checked>
+                        <label for="public-false" class="public-label">非公開（自分のみ）</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button id="cancel-save-btn" class="btn-cancel">もどる</button>
+            <%= f.submit "保存する", :class =>"btn-submit", :id => "execute-save-btn" %>
+        </div>
+        
+        <% end %>
     </div>
 </div>

@@ -10,7 +10,7 @@ class CreatePatterns < ActiveRecord::Migration[7.2]
       t.integer :grid_height, default: 20
 
       t.boolean :is_public
-      t.integer :category
+      t.string :category
 
       t.timestamps
     end

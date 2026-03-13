@@ -5,7 +5,7 @@
     <div class="detail-header">
         <h1><%= @pattern.title %></h1>
         <div class="detail-meta">
-        <span class="badge"><%= @pattern.category || "未分類" %></span>
+        <span class="badge"><%= @pattern.category.presence || "未分類" %></span>
         <span class="date">最終更新: <%= @pattern.updated_at.to_fs(:datetime_jp) %></span>
         </div>
     </div>
