@@ -1,2 +1,66 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<%= stylesheet_link_tag "posts_index", "data-turbo-track": "reload" %>
+
+<div class="explore-container">
+    
+    <div class="explore-header-section">
+        <div class="explore-title">
+            <h1>みんなの編み図</h1>
+            <p>世界中のみんなが作った素敵なパターンを見てみよう</p>
+        </div>
+
+        <div class="explore-filters">
+            <%= search_form_for @q do |f| %>
+                <div class="search-box">
+                    <%= f.search_field :title_cont, placeholder: "作品名や作者名で検索...", :class => "search-input" %>
+                    <%= f.submit "検索", :class => "search-btn" %>
+                </div>
+            <% end %>
+            <div class="category-pills">
+                <span class="pill active">すべて</span>
+                <span class="pill"></span>
+                <span class="pill"></span>
+                <span class="pill"></span>
+                <span class="pill"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="explore-grid">
+        <% @public_patterns.each do |pattern| %>
+        <div class="explore-card">
+            
+            <div class="card-image-wrapper">
+                <%= link_to pattern_path(pattern) do %>
+                    <% if pattern.image.attached? %>
+                    <%= image_tag pattern.image, class: "explore-card-img" %>
+                    <% else %>
+                    <div class="explore-placeholder">No Image</div>
+                    <% end %>
+                <% end %>
+
+                <span class="explore-category-badge"><%= pattern.category || "未分類" %></span>
+
+                <div class="card-overlay-actions">
+                    <button class="action-icon-btn save" title="保存">🔖</button>
+                </div>
+            </div>
+
+            <div class="explore-card-info">
+                <%= link_to pattern_path(pattern), class: "title-link" do %>
+                    <h3 class="explore-card-title"><%= pattern.title %></h3>
+                <% end %>
+            
+                <div class="explore-card-meta">
+                    <div class="author-info">
+                        <div class="author-avatar">👤</div>
+                        <span class="author-name"><%= pattern.user&.name || "名無しさん" %></span>
+                    </div>
+                    <span class="post-date"><%= pattern.created_at.to_fs(:datetime_jp) %></span>
+                </div>
+            </div>
+
+        </div>
+        <% end %>
+    </div>
+
+</div>

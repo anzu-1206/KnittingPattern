@@ -25,12 +25,18 @@
         <h3>編み図の情報</h3>
         <table class="info-table">
             <tr>
-            <th>サイズ</th>
-            <td>横 <%= @pattern.grid_width %> 目 × 縦 <%= @pattern.grid_height %> 段</td>
+                <th>サイズ</th>
+                <td>横 <%= @pattern.grid_width %> 目 × 縦 <%= @pattern.grid_height %> 段</td>
             </tr>
             <tr>
-            <th>公開設定</th>
-            <td><%= @pattern.is_public ? "公開" : "非公開（自分のみ）" %></td>
+                <th>公開設定</th>
+                <td>
+                    <% if @pattern.is_public %>
+                    <span class="public">公開中</span>
+                    <% else %>
+                    <span>非公開</span>
+                    <% end %>
+                </td>
             </tr>
         </table>
 

@@ -24,7 +24,13 @@
                     <div class="placeholder-pattern"></div>
                 <% end %>
                 
-                <span class="status-badge">DRAFT</span>
+                <span class="status-badge">
+                    <% if pattern.is_public %>
+                    <span>公開中</span>
+                    <% else %>
+                    <span>非公開</span>
+                    <% end %>
+                </span>
             </div>
 
             <div class="card-content">

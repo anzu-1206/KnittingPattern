@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_one_attached :image
   has_many :patterns, dependent: :destroy
+  has_many :post, dependent: :destroy
 end
