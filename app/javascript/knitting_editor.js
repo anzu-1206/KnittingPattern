@@ -126,20 +126,29 @@ $(document).on('turbo:load', function() {
         if (patternData.length === 0) return;
 
         const $selectedCells = $('.cell.selected');
+        
         if ($selectedCells.length > 0) {
             $selectedCells.each(function() {
                 const r = parseInt($(this).attr('data-r'));
                 const c = parseInt($(this).attr('data-c'));
+                
                 patternData[r][c].color = color;
+                $(this).css('background-color', color);
             });
             $('.cell').removeClass('selected');
-            renderCanvas();
         } else {
             patternData[currentRow][currentCell].color = color;
+            
+            $(`.cell[data-r="${currentRow}"][data-c="${currentCell}"]`)
+                .css('background-color', color)
+                .removeClass('active');
+
             if (currentCell < patternData[currentRow].length - 1) {
                 currentCell++;
             }
-            renderCanvas();
+            
+            $(`.cell[data-r="${currentRow}"][data-c="${currentCell}"]`)
+                .addClass('active');
         }
     });
 
