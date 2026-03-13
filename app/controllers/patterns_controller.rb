@@ -1,6 +1,12 @@
 class PatternsController < ApplicationController
   def index
-    @q = Pattern.ransack(params[:q])
+    @patterns = current_user.patterns
+
+    if params[:category].present?
+      @patterns = @patterns.where(category: params[:category])
+    end
+
+    @q = @patterns.ransack(params[:q])
     @patterns = @q.result(distinct: true)
   end
 
@@ -60,11 +66,9 @@ class PatternsController < ApplicationController
     image_data = params.dig(:pattern, :image_data)
     return unless image_data.present?
 
-    # "data:image/png;base64,iVBORw0KGgo..." のカンマより後ろを取り出す
     base64_image = image_data.split(',').last
     decoded_image = Base64.decode64(base64_image)
 
-    # ActiveStorageを使って画像を添付（上書き）する
     pattern.image.attach(
       io: StringIO.new(decoded_image),
       filename: "pattern_#{Time.zone.now.to_i}.png",

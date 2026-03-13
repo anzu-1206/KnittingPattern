@@ -16,6 +16,10 @@ $(document).on('turbo:load', function() {
             $('#input-intro').val(window.AppConfig.initialIntro);
         }
 
+        if (window.AppConfig.initialCategory) {
+            $('#modal-category').val(window.AppConfig.initialCategory);
+        }
+
         if (window.AppConfig.hasOwnProperty('initialIsPublic')) {
             if (window.AppConfig.initialIsPublic === true) {
                 $('#public-true').prop('checked', true);
@@ -31,6 +35,8 @@ $(document).on('turbo:load', function() {
             renderCanvas();
         }
     }
+
+    let currentImageDataUrl = "";
 
 
     $('#start-btn').on('click', function() {
@@ -120,20 +126,29 @@ $(document).on('turbo:load', function() {
         if (patternData.length === 0) return;
 
         const $selectedCells = $('.cell.selected');
+        
         if ($selectedCells.length > 0) {
             $selectedCells.each(function() {
                 const r = parseInt($(this).attr('data-r'));
                 const c = parseInt($(this).attr('data-c'));
+                
                 patternData[r][c].color = color;
+                $(this).css('background-color', color);
             });
             $('.cell').removeClass('selected');
-            renderCanvas();
         } else {
             patternData[currentRow][currentCell].color = color;
+            
+            $(`.cell[data-r="${currentRow}"][data-c="${currentCell}"]`)
+                .css('background-color', color)
+                .removeClass('active');
+
             if (currentCell < patternData[currentRow].length - 1) {
                 currentCell++;
             }
-            renderCanvas();
+            
+            $(`.cell[data-r="${currentRow}"][data-c="${currentCell}"]`)
+                .addClass('active');
         }
     });
 
@@ -161,11 +176,6 @@ $(document).on('turbo:load', function() {
     $('#save-btn').off('click').on('click', function() {
         if (patternData.length === 0) return;
 
-        const title = $('#input-title').val().trim() || "無題の編み図";
-        const intro = $('#input-intro').val().trim();
-
-        const isPublicChecked = $('input[name="is_public_radio"]:checked').val() === 'true';
-        
         const width = patternData[0].length;
         const height = patternData.length;
 
@@ -183,8 +193,32 @@ $(document).on('turbo:load', function() {
                 ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
             }
         }
+
+        currentImageDataUrl = canvas.toDataURL('image/png');
+
+        $('#preview-image').attr('src', currentImageDataUrl);
+
+        $('#save-modal').removeClass('hidden');
+
+        setTimeout(function() {
+            $('#modal-title').focus();
+        }, 100);
+    });
+
+    $('#close-modal-btn, #cancel-save-btn').on('click', function() {
+        $('#save-modal').addClass('hidden');
+    });
+
+    $('#execute-save-btn').off('click').on('click', function() {
+        $(this).prop('disabled', true).text('保存中...');
+
+        const title = $('#modal-title').val().trim() || "無題の編み図";
+        const intro = $('#modal-intro').val().trim();
+        const category = $('#modal-category').val();
+        const isPublicChecked = $('input[name="modal-is-public"]:checked').val() === 'true';
         
-        const imageDataUrl = canvas.toDataURL('image/png');
+        const width = patternData[0].length;
+        const height = patternData.length;
 
         const saveUrl = (window.AppConfig && window.AppConfig.saveUrl) ? window.AppConfig.saveUrl : '/patterns';
         const saveMethod = (window.AppConfig && window.AppConfig.saveMethod) ? window.AppConfig.saveMethod : 'POST';
@@ -196,11 +230,12 @@ $(document).on('turbo:load', function() {
                 pattern: { 
                     title: title, 
                     introduction: intro,
+                    category: category,
                     grid_width: width, 
                     grid_height: height, 
                     pattern_data: JSON.stringify(patternData),
                     is_public: isPublicChecked,
-                    image_data: imageDataUrl 
+                    image_data: currentImageDataUrl
                 } 
             },
             headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
@@ -212,6 +247,7 @@ $(document).on('turbo:load', function() {
             },
             error: function(xhr) { 
                 alert("保存に失敗しました");
+                $('#execute-save-btn').prop('disabled', false).text('保存する');
             }
         });
     });
