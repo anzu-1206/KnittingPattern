@@ -34,7 +34,6 @@
 .search-pills form {
     display: flex;
     flex: 1; 
-    min-width: 350px;
     max-width: 400px
 }
 .search-bar {
@@ -200,10 +199,7 @@
         text-align: center;
         box-sizing: border-box;
     }
-    .search-pills form {
-        width: 100%;
-        box-sizing: border-box;
-    }
+
     .search-bar {
         width: 100%; 
         box-sizing: border-box;
