@@ -55,8 +55,8 @@
                 </p>
 
                 <div class="card-actions">
-                    <%= link_to "Edit", edit_pattern_path(pattern), class: "btn-edit" %>
-                    <%= link_to "Show", pattern_path(pattern), class: "btn-edit" %>
+                    <%= link_to "Edit", edit_pattern_path(pattern), class: "btn-edit", data: { turbo_frame: "_top" } %>
+                    <%= link_to "Show", pattern_path(pattern), class: "btn-edit", data: { turbo_frame: "_top" } %>
                     <%= link_to "🗑", pattern_path(pattern), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn-icon delete" %>
                 </div>
             </div>
@@ -67,4 +67,6 @@
     </div>
     <% end %>
 </div>
+
+<%= render "shared/footer" %>
 

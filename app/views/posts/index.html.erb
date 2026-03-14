@@ -21,15 +21,13 @@
     <%= turbo_frame_tag "patterns-list" do %>
     
         <div class="category-pills">
-            <div class="category-pills">
-                <%= link_to "すべて", posts_path, class: "pill #{'active' if params[:category].blank?}" %>
-                <%= link_to "キャラクター", posts_path(category: "キャラクター"), class: "pill #{'active' if params[:category] == 'キャラクター'}" %>
-                <%= link_to "動物・生き物", posts_path(category: "動物・生き物"), class: "pill #{'active' if params[:category] == '動物・生き物'}" %>
-                <%= link_to "お花・植物", posts_path(category: "お花・植物"), class: "pill #{'active' if params[:category] == 'お花・植物'}" %>
-                <%= link_to "幾何学・ノルディック", posts_path(category: "幾何学・ノルディック"), class: "pill #{'active' if params[:category] == '幾何学・ノルディック'}" %>
-                <%= link_to "冬小物", posts_path(category: "冬小物"), class: "pill #{'active' if params[:category] == '冬小物'}" %>
-                <%= link_to "その他", posts_path(category: "その他"), class: "pill #{'active' if params[:category] == 'その他'}" %>
-            </div>
+            <%= link_to "すべて", posts_path, class: "pill #{'active' if params[:category].blank?}" %>
+            <%= link_to "キャラクター", posts_path(category: "キャラクター"), class: "pill #{'active' if params[:category] == 'キャラクター'}" %>
+            <%= link_to "動物・生き物", posts_path(category: "動物・生き物"), class: "pill #{'active' if params[:category] == '動物・生き物'}" %>
+            <%= link_to "お花・植物", posts_path(category: "お花・植物"), class: "pill #{'active' if params[:category] == 'お花・植物'}" %>
+            <%= link_to "幾何学・ノルディック", posts_path(category: "幾何学・ノルディック"), class: "pill #{'active' if params[:category] == '幾何学・ノルディック'}" %>
+            <%= link_to "冬小物", posts_path(category: "冬小物"), class: "pill #{'active' if params[:category] == '冬小物'}" %>
+            <%= link_to "その他", posts_path(category: "その他"), class: "pill #{'active' if params[:category] == 'その他'}" %>
         </div>
 
         <div class="explore-grid fade-in-grid">
@@ -37,7 +35,7 @@
             <div class="explore-card">
                 
                 <div class="card-image-wrapper">
-                    <%= link_to pattern_path(pattern) do %>
+                    <%= link_to pattern_path(pattern), data: { turbo_frame: "_top" } do %>
                         <% if pattern.image.attached? %>
                         <%= image_tag pattern.image, class: "explore-card-img" %>
                         <% else %>
@@ -53,7 +51,7 @@
                 </div>
 
                 <div class="explore-card-info">
-                    <%= link_to pattern_path(pattern), class: "title-link" do %>
+                    <%= link_to pattern_path(pattern), class: "title-link", data: { turbo_frame: "_top" } do %>
                         <h3 class="explore-card-title"><%= pattern.title %></h3>
                     <% end %>
                 
@@ -72,3 +70,5 @@
         
     <% end %>
     </div>
+
+    <%= render "shared/footer" %>
