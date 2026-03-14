@@ -35,7 +35,7 @@
             <div class="explore-card">
                 
                 <div class="card-image-wrapper">
-                    <%= link_to pattern_path(pattern) do %>
+                    <%= link_to pattern_path(pattern), data: { turbo_frame: "_top" } do %>
                         <% if pattern.image.attached? %>
                         <%= image_tag pattern.image, class: "explore-card-img" %>
                         <% else %>
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="explore-card-info">
-                    <%= link_to pattern_path(pattern), class: "title-link" do %>
+                    <%= link_to pattern_path(pattern), class: "title-link", data: { turbo_frame: "_top" } do %>
                         <h3 class="explore-card-title"><%= pattern.title %></h3>
                     <% end %>
                 

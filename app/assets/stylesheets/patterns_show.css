@@ -1,5 +1,7 @@
 .pattern-detail-container {
     max-width: 1000px;
+    width: 95%;
+    box-sizing: border-box;
     margin: 40px auto;
     padding: 30px;
     border-radius: 12px;
@@ -131,4 +133,72 @@
 .btn-edit-large:hover {
     background: #ba2636;
     color: #fff;
+}
+
+
+@media screen and (max-width: 768px) {
+    .pattern-detail-container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+    
+    .detail-content {
+        gap: 20px;
+    }
+
+    .introduction-box {
+        margin-bottom: 20px;
+    }
+
+    .detail-actions {
+        flex-direction: column-reverse;
+        gap: 12px;
+    }
+    .btn-back, .btn-edit-large {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .pattern-detail-container {
+        width: 100%;
+        margin: 0;
+        padding: 15px;
+        box-shadow: none;
+    }
+
+    .detail-header h1 {
+        font-size: 24px;
+    }
+    .detail-meta {
+        font-size: 12px;
+    }
+
+    .detail-image-box, .detail-info-box {
+        min-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .detail-image-box {
+        padding: 10px;
+    }
+
+    .info-table th {
+        font-size: 14px;
+    }
+    .info-table td {
+        font-size: 14px;
+    }
+
+    .detail-actions {
+        flex-direction: column-reverse;
+        gap: 12px;
+    }
+    .btn-back, .btn-edit-large {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
 }
