@@ -1,14 +1,18 @@
 .new {
     background-color: #f3f3f3;
-    padding: 60px 0 120px;
+    padding: 60px 20px 120px;
+    box-sizing: border-box;
 }
 .new-table {
     background-color: white;
     height: fit-content;
-    width: 705px;
+    max-width: 705px;
+    width: 100%;
+    box-sizing: border-box;
     padding: 50px 20px;
     margin-right: auto;
     margin-left: auto;
+    border-radius: 8px;
 }
 .signup-title {
     margin-top: 0;
@@ -75,12 +79,13 @@ label {
     padding: 15px 24px;
     width: 100%;
     height: fit-content;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 .li-login {
     border-radius: 10px;
     border: #6a6a6a solid 1px;
     font-size: 20px;
-    padding: 15px 24px;
     width: 100%;
     height: fit-content;
     text-align: center;
@@ -88,4 +93,38 @@ label {
 }
 .cansel {
     color: #212529;
+    display: block;
+    width: 100%;
+    padding: 15px 24px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+    .new {
+        padding: 40px 15px 80px;
+    }
+    .new-table {
+        padding: 40px 30px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .new {
+        padding: 20px 10px 60px;
+    }
+    .new-table {
+        padding: 30px 15px; 
+    }
+    
+    .signup-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    .submit, .li-login {
+        font-size: 16px;
+    }
+    .submit, .cansel {
+        padding: 12px 20px;
+    }
 }
