@@ -11,6 +11,8 @@
 }
 .first {
     background-color: #fef4f4;
+    padding: 60px 100px;
+    margin-bottom: 100px;
 }
 .firstview-title {
     font-size: 50px;
@@ -19,17 +21,17 @@
 .color-change {
     color: #e50012;
 }
-.firstview-img {
+.top-image {
     width: 100%;
-    max-width: 500px;
+    max-width: 700px;
     height: auto;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 40px auto 10px;
 }
 .guestlogin {
     margin-top: 40px;
     color: white;
     background-color: #e50012;
+    border-radius: 8px;
     padding: 20px 40px;
 }
 
