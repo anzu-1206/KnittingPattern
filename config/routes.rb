@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "bookmark/create"
+  get "bookmark/destroy"
   root to: "makepatterns#index"
 
   get "makepatterns/index"
@@ -14,6 +16,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
+
+  resources :posts do
+    resource :bookmarks, only: [:create, :destroy]
+  end
 
   devise_scope :user do
     get 'account_setting', to: 'users/sessions#account_setting', as: :account_setting_user_session
