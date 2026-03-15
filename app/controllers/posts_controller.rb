@@ -6,6 +6,12 @@ class PostsController < ApplicationController
       @public_patterns = @public_patterns.where(category: params[:category])
     end
 
+    if params[:bookmark] && user_signed_in?
+      @posts = current_user.bookmarked_posts.order(created_at: :desc)
+    else
+      @posts = Post.all
+    end
+
     @q = Pattern.ransack(params[:q])
     @patterns = @q.result(distinct: true)
   end
