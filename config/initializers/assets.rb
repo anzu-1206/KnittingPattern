@@ -30,6 +30,8 @@ Rails.application.config.assets.precompile += %w( users_new.css )
 
 Rails.application.config.assets.precompile += %w( registrations_new.css )
 
+Rails.application.config.assets.precompile += %w( bookmark.css )
+
 Rails.application.config.assets.precompile += %w( controllers/hello_controller.js )
 Rails.application.config.assets.precompile += %w( controllers/index.js )
 Rails.application.config.assets.precompile += %w( dropdown.js )

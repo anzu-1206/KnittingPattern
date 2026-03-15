@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get "bookmark/create"
-  get "bookmark/destroy"
   root to: "makepatterns#index"
 
   get "makepatterns/index"
@@ -17,7 +15,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :posts do
+  resources :patterns do
     resource :bookmarks, only: [:create, :destroy]
   end
 

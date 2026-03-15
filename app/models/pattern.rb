@@ -1,6 +1,7 @@
 class Pattern < ApplicationRecord
     belongs_to :user
     has_many :post
+    has_many :bookmarks, dependent: :destroy
 
     def self.ransackable_attributes(auth_object = nil)
         ["title"]

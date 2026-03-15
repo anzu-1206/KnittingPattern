@@ -41,10 +41,10 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_15_080438) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "post_id", null: false
+    t.integer "pattern_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_bookmarks_on_post_id"
+    t.index ["pattern_id"], name: "index_bookmarks_on_pattern_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
@@ -95,7 +95,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_15_080438) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "bookmarks", "posts"
+  add_foreign_key "bookmarks", "patterns"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "patterns", "users"
 end
