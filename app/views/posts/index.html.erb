@@ -29,6 +29,12 @@
             <%= link_to "冬小物", posts_path(category: "冬小物"), class: "pill #{'active' if params[:category] == '冬小物'}" %>
             <%= link_to "その他", posts_path(category: "その他"), class: "pill #{'active' if params[:category] == 'その他'}" %>
         </div>
+        <div class="category-links" style="margin-bottom: 20px;">
+            <%= link_to "すべての編み図", posts_path, class: "btn" %>
+            <% if user_signed_in? %>
+                <%= link_to "保存済み", posts_path(bookmark: true), class: "btn" %>
+            <% end %>
+        </div>
 
         <div class="explore-grid fade-in-grid">
             <% @public_patterns.each do |pattern| %>
