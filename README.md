@@ -7,7 +7,6 @@
 ## 2. アプリのスクショ
 ![トップ画面](images/home-page.png)
 ![作成画面](images/create.png)
-> ※ここにGIF動画（操作している様子）を貼るとさらに魅力が伝わります！
 
 ## 3. 使い方
 1. 図案を作る: 好きな画像を読み込んで自動でドット絵に変換するか、ゼロからキャンバスにポチポチと描画します。
@@ -38,7 +37,7 @@ HTML / CSS / JavaScript
 Hotwire（Turbo）
 
 ### バックエンド
-Ruby 3.1.6
+Ruby 3.2.3
 Ruby on Rails 7.2.2
 PostgreSQL（データベース）
 
