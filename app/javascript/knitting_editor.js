@@ -132,12 +132,16 @@ $(document).on('turbo:load', function() {
                 const r = parseInt($(this).attr('data-r'));
                 const c = parseInt($(this).attr('data-c'));
                 
-                patternData[r][c].color = color;
-                $(this).css('background-color', color);
+                if (patternData[r] && patternData[r][c]) {
+                    patternData[r][c].color = color;
+                    $(this).css('background-color', color);
+                }
             });
             $('.cell').removeClass('selected');
         } else {
-            patternData[currentRow][currentCell].color = color;
+            if (patternData[currentRow] && patternData[currentRow][currentCell]) {
+                patternData[currentRow][currentCell].color = color;
+            }
             
             $(`.cell[data-r="${currentRow}"][data-c="${currentCell}"]`)
                 .css('background-color', color)
@@ -366,7 +370,7 @@ $(document).on('turbo:load', function() {
         $('.cell').css('height', (25 * ratio) + 'px');
     });
 
-    $(document).on('keydown', function(e) {
+    $(document).off('keydown').on('keydown', function(e) {
         if (patternData.length === 0) return;
         if ($(e.target).is('input, textarea')) return;
         let moved = false;
