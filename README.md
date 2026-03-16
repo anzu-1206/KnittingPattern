@@ -42,7 +42,7 @@ Ruby on Rails 7.2.2
 PostgreSQL（データベース）
 
 ### インフラ・開発環境
-Heroku（デプロイ）
+Render（デプロイ）
 Git / GitHub（バージョン管理）
 
 ## 7. ER図
