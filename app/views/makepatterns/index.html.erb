@@ -6,7 +6,7 @@
         <div class="container first">
             <p class="firstview-title">
             編み物を、もっと自由に。<br>
-            <span class="color-change">自分だけの編み図</span>をでデジタルで。</p>
+            <span class="color-change">自分だけの編み図</span>をデジタルで。</p>
             <%= image_tag "top-image.png", :class => "top-image" %>
             <%= link_to "ログインせずに使ってみる", users_guest_sign_in_path, data: { turbo_method: :post }, :class => "guestlogin" %>
         </div>
@@ -173,7 +173,7 @@
         <div class="container sixth">
             <h3 class="container-title">あなただけの編み図を作りませんか？</h3>
             <p class="sixth-subtitle">まずは登録なしで気軽に、お手元の作品を編み図にしてみましょう。</p>
-            <%= link_to "ログインせずに使ってみる", users_guest_sign_in_path, :class => "lets-use" %>
+            <%= link_to "ログインせずに使ってみる", users_guest_sign_in_path, data: { turbo_method: :post }, :class => "lets-use" %>
         </div>
 
     </div>
