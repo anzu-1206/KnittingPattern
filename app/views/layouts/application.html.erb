@@ -28,7 +28,9 @@
   <body>
   <header>
     <div class="header">
-      <a href="/makepatterns/index"><img class="header-logo" src="">Ami-Labo（仮）</a>
+      <a href="/makepatterns/index">
+        <%= image_tag "ami-labo.png", :class => "header-logo" %>
+      </a>
 
       <input type="checkbox" id="menu-toggle" class="menu-toggle">
       
@@ -37,7 +39,7 @@
         <span></span>
         <span></span>
       </label>
-      
+
       <div class="header-container">
         <ul class="header-contents">
           <li><%=link_to "みんなの編み図", posts_path, :class => "head-link" %></li>

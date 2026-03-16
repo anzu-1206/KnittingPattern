@@ -6,6 +6,10 @@
     padding: 40px 100px;
     box-sizing: border-box;
 }
+.footer-logo {
+    width: 200px;
+    height: auto;
+}
 .footer-contents-list {
     display: flex;
     flex-direction: row;

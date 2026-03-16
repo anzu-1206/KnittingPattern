@@ -1,5 +1,5 @@
 class Pattern < ApplicationRecord
-    belongs_to :user
+    belongs_to :user, dependent: :destroy
     has_many :post
     has_many :bookmarks, dependent: :destroy
 

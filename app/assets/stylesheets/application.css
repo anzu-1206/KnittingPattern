@@ -41,6 +41,10 @@ header {
     justify-content: space-between;
     padding: 0 32px;
 }
+.header-logo {
+    width: 200px;
+    height: auto;
+}
 
 .menu-toggle {
     display: none;
@@ -133,6 +137,10 @@ header {
         padding: 0 20px;
         min-height: 70px;
         position: relative;
+    }
+    .header-logo {
+        width: 150px;
+        height: auto;
     }
     .menu-icon {
         display: block;
