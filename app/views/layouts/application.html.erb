@@ -3,14 +3,89 @@
   <head>
     <title>KnittingPattern</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="turbolinks-visit-control" content="reload">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_importmap_tags %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.min.css" integrity="sha512-aQb0/doxDGrw/OC7drNaJQkIKFu6eSWnVMAwPN64p6sZKeJ4QCDYL42Rumw2ZtL8DB9f66q4CnLIUnAw28dEbg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <%= yield :css %>
   </head>
 
   <body>
+  <header>
+    <div class="header">
+      <a href="/makepatterns/index">
+        <%= image_tag "ami-labo.png", :class => "header-logo" %>
+      </a>
+
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+      
+      <label for="menu-toggle" class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <div class="header-container">
+        <ul class="header-contents">
+          <li><%=link_to "みんなの編み図", posts_path, :class => "head-link" %></li>
+          <li><%=link_to "作者について", makepatterns_aboutme_path, :class => "head-link" %></li>
+          <li>
+            <% if user_signed_in? %>
+              <div class="logined-content">
+                <button class="index-dropdown" id="IndexDropdown">
+                  <span class="profile-img">
+                    <% if current_user.image.attached? %>
+                      <%= image_tag current_user.image, size: "40x40" %>
+                    <% else %>
+                      <%= image_tag "https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png", size: "40x40" %>
+                    <% end %>
+                  </span>
+                  <svg class="dropdown-svg" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M14 19h-14v-1h14v1zm9.247-8.609l-3.247 4.049-3.263-4.062-.737.622 4 5 4-5-.753-.609zm-9.247 2.609h-14v-1h14v1zm0-6h-14v-1h14v1z"/></svg>
+                </button>
+                <div class="index-dropdown-contents" id="IndexDropdownContents">
+                  <ul class="dropdown-ul">
+                    <li class="dropdown-menu"><%=link_to "▸ パターン作成", new_pattern_path, :class => "log" %></li>
+                    <li class="dropdown-menu"><%=link_to "▸ パターン一覧", patterns_index_path, :class => "log" %></li>
+                    <li class="dropdown-menu"><%=link_to "▸ アカウント設定", account_setting_user_session_path, :class => "log" %></li>
+                    <li class="dropdown-menu"><%= link_to "▸ ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, :class => "log" %></li>
+                  </ul>
+                </div>
+              </div>
+            <% else %>
+              <div>
+                <ul class="header-login">
+                  <li class="to-users"><%=link_to "ログイン", new_user_session_path, :class => "login" %></li>
+                  <li class="to-users"><%=link_to "新規登録", new_user_registration_path, :class => "new-user" %></li>
+                  <li class="to-users"><%= link_to "ゲストログイン", users_guest_sign_in_path, data: { turbo_method: :post }, :class => "header-guestlogin" %></li>
+                </ul>
+              </div>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <% if notice %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
     <%= yield %>
   </body>
 </html>

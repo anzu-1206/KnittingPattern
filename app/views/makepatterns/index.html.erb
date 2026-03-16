@@ -1,0 +1,182 @@
+<%= stylesheet_link_tag "makepatterns_index", "data-turbo-track": "reload" %>
+
+<body>
+    <div class="firstview">
+
+        <div class="container first">
+            <p class="firstview-title">
+            編み物を、もっと自由に。<br>
+            <span class="color-change">自分だけの編み図</span>をでデジタルで。</p>
+            <%= image_tag "top-image.png", :class => "top-image" %>
+            <%= link_to "ログインせずに使ってみる", users_guest_sign_in_path, data: { turbo_method: :post }, :class => "guestlogin" %>
+        </div>
+
+        <div class="container">
+            <h3 class="container-title">開発の背景</h3>
+            <p class="second-text">
+                「オリジナルの模様を編みたい！」と思っても、一からペンで図案を試行錯誤するのは修正が大変でした。<br>
+                そのうち、もっと手軽に自分だけのデザインを楽しめるツールが欲しいと考えたのが開発のきっかけです。<br>
+                そこで、好きな画像をパッとドット絵に変換したり、実際の編み目に近い比率で確認できる専用アプリを作成しました。<br>
+                段数カウントなど編み物特有の悩みをデジタルの力で解決し、アイデアを直感的に形にするため、本アプリの作成を決めました。
+            </p>
+        </div>
+
+        <div class="container third">
+            <h3 class="container-title">本アプリでできること</h3>
+            <ul class="cando">
+                <li class="cando-list">
+                    <div>
+                        <svg class="can-img" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m15.97 17.031c-1.479 1.238-3.384 1.985-5.461 1.985-4.697 0-8.509-3.812-8.509-8.508s3.812-8.508 8.509-8.508c4.695 0 8.508 3.812 8.508 8.508 0 2.078-.747 3.984-1.985 5.461l4.749 4.75c.146.146.219.338.219.531 0 .587-.537.75-.75.75-.192 0-.384-.073-.531-.22zm-5.461-13.53c-3.868 0-7.007 3.14-7.007 7.007s3.139 7.007 7.007 7.007c3.866 0 7.007-3.14 7.007-7.007s-3.141-7.007-7.007-7.007zm-.744 6.26h-2.5c-.414 0-.75.336-.75.75s.336.75.75.75h2.5v2.5c0 .414.336.75.75.75s.75-.336.75-.75v-2.5h2.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-2.5v-2.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75z" fill-rule="nonzero"/></svg>
+                        <p class="cando-title">デジタルだから拡大・縮小も自由</p>
+                        <p>細かい目や模様も、ズームすれば一目瞭然。<br>
+                            段数や色を迷わず確認できます。</p>
+                    </div>
+                </li>
+                <li class="cando-list">
+                    <div>
+                        <svg class="can-img" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11.25 6c.398 0 .75.352.75.75 0 .414-.336.75-.75.75-1.505 0-7.75 0-7.75 0v12h17v-8.75c0-.414.336-.75.75-.75s.75.336.75.75v9.25c0 .621-.522 1-1 1h-18c-.48 0-1-.379-1-1v-13c0-.481.38-1 1-1zm-2.011 6.526c-1.045 3.003-1.238 3.45-1.238 3.84 0 .441.385.626.627.626.272 0 1.108-.301 3.829-1.249zm.888-.889 3.22 3.22 8.408-8.4c.163-.163.245-.377.245-.592 0-.213-.082-.427-.245-.591-.58-.578-1.458-1.457-2.039-2.036-.163-.163-.377-.245-.591-.245-.213 0-.428.082-.592.245z" fill-rule="nonzero"/></svg>
+                        <p class="cando-title">修正もワンクリック</p>
+                        <p>色の変更もやり直しも一瞬。<br>
+                            何度でも試行錯誤できます。</p>
+                    </div>
+                </li>
+                <li class="cando-list">
+                    <div>
+                        <svg class="can-img" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M16.086 24h-2.165c-1.278-3.005-1.458-5.067.182-7 .553-.651 1.417-1.479 1.804-1.877.952-.982 2.405-1.063 3.089-.23v-3.304c.035-1.578 1.16-2.589 2.457-2.589 1.41 0 2.455.999 2.546 2.486l.001 4.842c-.022.987-.129 1.435-.647 2.404-.828 1.515-1.832 3.17-2.099 5.268h-2.011c.307-3.069 2.075-5.58 2.545-6.606.18-.397.204-.592.213-1.015v-4.812c0-.723-1.006-.723-1.006.001v3.888c-.034.786-.334 1.251-.85 1.858-.5.587-1.796 2.07-2.36 2.686-.817.895-2.095-.22-1.367-1.219.153-.21 1.248-1.362 1.453-1.624.439-.557-.119-1.007-.629-.515-.724.723-1.505 1.561-1.75 1.828-1.284 1.399.11 4.383.594 5.53zm-6.007 0c1.278-3.005 1.458-5.067-.182-7-.553-.651-1.417-1.479-1.804-1.877-.952-.982-2.405-1.063-3.089-.23v-3.304c-.035-1.578-1.16-2.589-2.457-2.589-1.41 0-2.455.999-2.546 2.486l-.001 4.842c.022.987.129 1.435.647 2.404.828 1.515 1.832 3.171 2.099 5.268h2.011c-.307-3.069-2.075-5.58-2.545-6.606-.18-.397-.204-.592-.213-1.015v-4.812c0-.723 1.006-.723 1.006.001v3.888c.034.786.334 1.251.85 1.858.5.587 1.796 2.07 2.36 2.686.817.895 2.095-.22 1.367-1.219-.153-.21-1.248-1.362-1.453-1.624-.439-.557.119-1.007.629-.515.724.723 1.505 1.561 1.75 1.828 1.284 1.4-.11 4.383-.594 5.53h2.165zm2.21-8h-.596c-.156 0-.307-.053-.41-.145l-.792-.522h3l-.792.522c-.102.092-.253.145-.41.145zm1.23-1.333h-3.038c-.184 0-.334-.149-.334-.334 0-.184.15-.333.334-.333h3.038c.184 0 .334.149.334.333 0 .185-.149.333-.334.334zm-1.763-1.315h-1.886c-.017-3.426-1.87-3.837-1.87-6.196 0-2.26 1.77-3.802 4-3.802h.026c2.218.012 3.974 1.551 3.974 3.802 0 2.359-1.855 2.77-1.872 6.196h-1.886c0-3.647 1.758-4.819 1.758-6.201 0-1.141-.925-1.778-2-1.798h-.025c-1.064.03-1.975.666-1.975 1.798 0 1.382 1.756 2.554 1.756 6.201zm-4.915-4.838c.116.443.277.841.48 1.247l-1.471.676-.551-1.214 1.542-.709zm10.318 0l1.488.687-.551 1.215-1.419-.656c.2-.4.366-.81.482-1.246zm2.174-1.181h-2.002c.014-.446-.026-.896-.123-1.333h2.125v1.333zm-12.664 0h-2.002v-1.333h2.124c-.095.436-.135.884-.122 1.33v.003zm9.36-3.618l1.656-1.176.772 1.088-1.67 1.184c-.194-.388-.446-.754-.758-1.096zm-8.058-.001c-.307.335-.558.7-.759 1.097l-1.669-1.184.772-1.088 1.656 1.175zm5.912-1.395l.885-1.793 1.195.59-.884 1.793c-.372-.244-.774-.442-1.196-.59zm-3.767-.001c-.421.147-.824.344-1.196.589l-.884-1.791 1.196-.59.884 1.792zm2.551-.277c-.446-.052-.873-.055-1.334-.002v-2.039h1.334v2.041z"/></svg>
+                        <p class="cando-title">編み図をみんなで共有</p>
+                        <p>完成した図案は他のユーザーとシェア。<br>
+                            みんなの作品を見て、次のアイデアを。</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <h3 class="container-title">主要機能</h3>
+
+            <div class="features-inner">
+                <div class="feature-row">
+                    <div class="feature-text">
+                        <span class="feature-number">01</span>
+                        <h3 class="feature-title">直感的な操作で、すぐに形に</h3>
+                        <p class="feature-desc">
+                            好きな画像を読み込むだけで、パッとドット絵の図案に変換。難しい操作は一切なく、思い描いたアイデアをすぐにオリジナルの編み込み模様として形にできます。
+                        </p>
+                    </div>
+                    <div class="feature-image-wrapper">
+                        <%= image_tag "feature-1.png", :class => "feature-img" %>
+                    </div>
+                </div>
+
+                <div class="feature-row reverse">
+                    <div class="feature-text">
+                        <span class="feature-number">02</span>
+                        <h3 class="feature-title">ズーム機能で細部までこだわる</h3>
+                        <p class="feature-desc">
+                            細かい部分もストレスなく編集可能。大きく拡大してもカラーパレットや操作ボタンは常に固定されているため、画面をスクロールして行ったり来たりすることなく、作業に集中できます。
+                        </p>
+                    </div>
+                    <div class="feature-image-wrapper">
+                        <%= image_tag "feature-2.png", :class => "feature-img" %>
+                    </div>
+                </div>
+
+                <div class="feature-row">
+                    <div class="feature-text">
+                        <span class="feature-number">03</span>
+                        <h3 class="feature-title">タイピング感覚の入力サポート</h3>
+                        <p class="feature-desc">
+                            色や記号をクリックするだけで、自動的に次のマスへ移動。まるでキーボードでタイピングするように、サクサクとリズミカルに図案を作成できる心地よい操作感を実現しました。
+                        </p>
+                    </div>
+                    <div class="feature-image-wrapper">
+                        <%= image_tag "feature-3.png", :class => "feature-img" %>
+                    </div>
+                </div>
+
+                <div class="feature-row reverse">
+                    <div class="feature-text">
+                        <span class="feature-number">04</span>
+                        <h3 class="feature-title">作った図案をみんなと共有</h3>
+                        <p class="feature-desc">
+                            完成した自慢のパターンは、ワンクリックで公開可能。「保存済み」にストックしたり、他のユーザーの素敵な作品を見て次のアイデアをもらったりと、編み物の楽しみが広がります。
+                        </p>
+                    </div>
+                    <div class="feature-image-wrapper">
+                        <%= image_tag "feature-4.png", :class => "feature-img" %>
+                    </div>
+                </div>
+
+                <div class="feature-row">
+                    <div class="feature-text">
+                        <span class="feature-number">05</span>
+                        <h3 class="feature-title">リアルな編み目比率でデザイン</h3>
+                        <p class="feature-desc">
+                            マスの大きさは、実際の編み目のサイズ（縦横比）に合わせて調整可能。真四角のドット絵アプリとは違い、編み上がりの姿をリアルにイメージしながらデザインできるため、完成後の「なんだか伸びちゃった…」を防ぎます。
+                        </p>
+                    </div>
+                    <div class="feature-image-wrapper">
+                        <%= image_tag "feature-5.png", :class => "feature-img" %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container fifth">
+            <h3 class="container-title">技術スタック</h3>
+            <ul class="technologys">
+                <li class="technologys-list">
+                    <div>
+                        <p class="language">Ruby on Rails</p>
+                        <p class="language-role">Backend Framework</p>
+                    </div>
+                </li>
+
+                <li class="technologys-list">
+                    <div>
+                        <p class="language">jQuery</p>
+                        <p class="language-role">fronted intereaction</p>
+                    </div>
+                </li>
+
+                <li class="technologys-list">
+                    <div>
+                        <p class="language">JavaScript</p>
+                        <p class="language-role">fronted intereaction</p>
+                    </div>
+                </li>
+
+                <li class="technologys-list">
+                    <div>
+                        <p class="language">PostgreSQL</p>
+                        <p class="language-role">Database Management System</p>
+                    </div>
+                </li>
+
+                <li class="technologys-list">
+                    <div>
+                        <p class="language">HTML</p>
+                        <p class="language-role">Markup Language</p>
+                    </div>
+                </li>
+
+                <li class="technologys-list">
+                    <div>
+                        <p class="language">CSS</p>
+                        <p class="language-role">Stylesheet Language</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container sixth">
+            <h3 class="container-title">あなただけの編み図を作りませんか？</h3>
+            <p class="sixth-subtitle">まずは登録なしで気軽に、お手元の作品を編み図にしてみましょう。</p>
+            <%= link_to "ログインせずに使ってみる", users_guest_sign_in_path, :class => "lets-use" %>
+        </div>
+
+    </div>
+
+    <%= render "shared/footer" %>
+</body>

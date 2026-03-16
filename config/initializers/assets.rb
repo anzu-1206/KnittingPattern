@@ -12,3 +12,28 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+
+Rails.application.config.assets.precompile += %w( footer.css )
+
+Rails.application.config.assets.precompile += %w( makepatterns_index.css )
+Rails.application.config.assets.precompile += %w( makepatterns_new.css )
+Rails.application.config.assets.precompile += %w( makepatterns_aboutme.css )
+
+Rails.application.config.assets.precompile += %w( patterns_index.css )
+Rails.application.config.assets.precompile += %w( patterns_show.css )
+
+Rails.application.config.assets.precompile += %w( posts_index.css )
+
+Rails.application.config.assets.precompile += %w( sessions_new.css )
+Rails.application.config.assets.precompile += %w( sessions_account_setting.css )
+Rails.application.config.assets.precompile += %w( users_new.css )
+
+Rails.application.config.assets.precompile += %w( registrations_new.css )
+
+Rails.application.config.assets.precompile += %w( bookmark.css )
+
+Rails.application.config.assets.precompile += %w( controllers/hello_controller.js )
+Rails.application.config.assets.precompile += %w( controllers/index.js )
+Rails.application.config.assets.precompile += %w( dropdown.js )
+Rails.application.config.assets.precompile += %w( tab.js )
+Rails.application.config.assets.precompile += %w( knitting_editor.js )

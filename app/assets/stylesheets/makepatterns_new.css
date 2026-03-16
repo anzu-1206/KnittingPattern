@@ -1,0 +1,518 @@
+.editor-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+}
+.editor-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #333;
+    flex-shrink: 0;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+.symbol-palette {
+    display: flex;
+    flex-direction: column;
+    width: 90px;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    padding: 0;
+    height: 100%;
+}
+
+.sidebar-tabs {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+    flex: 1;
+    border: none;
+    background: #f5f5f5;
+    padding: 8px 0;
+    font-size: 12px;
+    cursor: pointer;
+    color: #666;
+    border-bottom: 2px solid transparent;
+}
+.tab-btn.active {
+    background: #fff;
+    color: #333;
+    font-weight: bold;
+    border-bottom: 2px solid #333;
+}
+
+.tab-content {
+    display: none;
+    padding: 10px;
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+.tab-content.active {
+    display: block;
+}
+
+.setting-group {
+    margin-bottom: 15px;
+}
+.setting-label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 5px 0;
+}
+.setting-btn {
+    width: 100%;
+    padding: 5px;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.setting-btn:hover {
+    background: #ddd;
+}
+
+.palette-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.palette-label {
+    font-size: 11px;
+    color: #666;
+    margin: 0 0 5px 0;
+    font-weight: bold;
+    text-align: center;
+}
+.picker-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+input[type="color"]#color-picker {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background: none;
+    box-sizing: border-box;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0; 
+}
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 3px;
+}
+
+#confirm-color-btn {
+    width: 100%;
+    height: 30px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#confirm-color-btn:hover {
+    background-color: #555;
+}
+
+.palette-divider {
+    width: 80%;
+    height: 1px;
+    background-color: #eee;
+    margin: 15px 0;
+}
+.history-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.color-item {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.color-item:hover {
+    transform: scale(1.1);
+    border-color: #333;
+}
+.color-item.selected {
+    border: 2px solid #333 !important;
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.palette-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+.palette-label {
+    font-size: 11px;
+    color: #666;
+    font-weight: bold;
+    margin: 0;
+}
+
+#clear-history-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.2s;
+}
+
+#clear-history-btn:hover {
+    color: #e50012;
+    background-color: #fff0f0;
+}
+
+.canvas-container {
+    flex: 1;
+    overflow: auto;
+    background: #fdfaf5;
+    position: relative;
+    cursor: grab;
+}
+#canvas-viewport {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: visible;
+}
+#knitting-canvas {
+    transform-origin: top center;
+    transform: scale(1) translate(0px, 0px);
+    transition: transform 0.1s ease-out;
+    background: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    width: max-content;
+}
+
+.mode-chain {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+}
+.knit-row {
+    display: flex;
+    justify-content: flex-start;
+}
+.cell {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    background: white;
+    box-sizing: border-box;
+}
+.cell.active {
+    border: 2px solid #e50012;
+    z-index: 10;
+}
+
+.tools {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.start-btn {
+    color: white;
+    background-color: #333;
+    border: white solid 1px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.tool-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border: none;
+    cursor: pointer;
+}
+.tool-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.cell.selected {
+    background-color: rgba(87, 165, 255, 0.438) !important;
+    border: 1px solid #0056b3;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+.modal-overlay.hidden .modal-content {
+    transform: translateY(30px);
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+    padding-left: 10px;
+}
+.close-btn { 
+    background: none; 
+    border: none; 
+    font-size: 28px; 
+    cursor: pointer; 
+    color: #999; 
+}
+.modal-body {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 3px;
+}
+.modal-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 12px;
+    font-family: inherit;
+}
+textarea.modal-input {
+    resize: vertical;
+    overflow: auto;
+}
+.modal-input:focus {
+    outline: none;
+    border-color: #e50012;
+}
+#modal-category {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.radio-group {
+    margin-bottom: 5px;
+}
+.public-label {
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+.btn-cancel{
+    padding: 8px 15px;
+    margin-right: 10px;
+    border-radius: 8px;
+    border: #999 1px solid;
+    background-color: white;
+    font-weight: 500;
+}
+.btn-submit{
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #e50012;
+    color: white;
+    font-weight: 500;
+}
+
+
+@media screen and (max-width: 992px) {
+    .editor-toolbar {
+        padding: 10px;
+        gap: 10px;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    .tools {
+        flex-shrink: 0;
+    }
+}
+
+/* =========================================
+   スマホ用（画面幅が 767px 以下のとき）
+========================================= */
+@media screen and (max-width: 767px) {
+    .editor-toolbar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 8px;
+    }
+    #row-counter {
+        font-size: 14px;
+    }
+
+    /* =========================================
+   スマホ用（画面幅が 767px 以下のとき）の修正部分
+========================================= */
+    .main-layout {
+        flex-direction: column-reverse; 
+    }
+    .symbol-palette {
+        width: 100%; 
+        height: 180px;
+        flex-direction: column;
+        border-right: none;
+        border-top: 1px solid #ddd;
+    }
+    .tab-content.active {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        padding: 10px 15px;
+        height: calc(100% - 35px);
+        overflow-x: auto;
+        overflow-y: hidden;
+        align-items: center;
+    }
+    .tab-content:not(.active) {
+        display: none;
+    }
+    .palette-section {
+        width: auto;
+        min-width: 160px;
+        flex-shrink: 0;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .setting-group {
+        min-width: 160px;
+        flex-shrink: 0;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .palette-divider {
+        width: 1px;
+        height: 80%;
+        background-color: #eee;
+        margin: 0;
+        flex-shrink: 0;
+    }
+    .history-list {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        width: 100%;
+        padding-bottom: 5px;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .modal-body {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .modal-preview img {
+        max-height: 200px;
+    }
+    .modal-footer {
+        padding: 15px;
+    }
+    .btn-submit {
+        flex: 1;
+        text-align: center;
+    }
+}

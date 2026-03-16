@@ -1,0 +1,65 @@
+<%= stylesheet_link_tag "sessions_account_setting", "data-turbo-track": "reload" %>
+
+<body>
+    <div class="account-setting">
+        <h3 class="setting-title">設定</h3>
+        <div class="setting-container">
+            <ul class="setting-tab" id="tabcontrol">
+                <li class="setting-tab-item"><a class="tabpages" href="#tabpage1">アカウント</a></li>
+                <li class="setting-tab-item"><a class="tabpages" href="#tabpage2">プロフィール</a></li>
+            </ul>
+            <div id="tabbody" class="setting-body">
+                <div class="account-information" id="tabpage1">
+                    <div class="list-top">
+                        <p class="information-title">アカウント</p>
+                        <%= link_to edit_account_user_registration_path, class: "setting-edit" do %>
+                            <svg class="edit-svg" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m4.481 15.659c-1.334 3.916-1.48 4.232-1.48 4.587 0 .528.46.749.749.749.352 0 .668-.137 4.574-1.492zm1.06-1.061 3.846 3.846 11.321-11.311c.195-.195.293-.45.293-.707 0-.255-.098-.51-.293-.706-.692-.691-1.742-1.74-2.435-2.432-.195-.195-.451-.293-.707-.293-.254 0-.51.098-.706.293z" fill-rule="nonzero"/></svg>
+                            編集
+                        <% end %>
+                    </div>
+                    <div class="setting-item">
+                        <p class="setting-item-title">メールアドレス</p>
+                        <p class="setting-item-data"><%= current_user.email %></p>
+                    </div>
+                    <div class="setting-item">
+                        <p class="setting-item-title">パスワード</p>
+                        <p class="setting-item-data">*********</p>
+                    </div>
+                </div>
+                
+                <div class="account-information" id="tabpage2">
+                    <div class="list-top">
+                        <p class="information-title">プロフィール</p>
+                        <%= link_to edit_profile_user_registration_path, class: "setting-edit" do %>
+                            <svg class="edit-svg"  clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m4.481 15.659c-1.334 3.916-1.48 4.232-1.48 4.587 0 .528.46.749.749.749.352 0 .668-.137 4.574-1.492zm1.06-1.061 3.846 3.846 11.321-11.311c.195-.195.293-.45.293-.707 0-.255-.098-.51-.293-.706-.692-.691-1.742-1.74-2.435-2.432-.195-.195-.451-.293-.707-.293-.254 0-.51.098-.706.293z" fill-rule="nonzero"/></svg>
+                            編集
+                        <% end %>
+                    </div>
+                    <div class="setting-item">
+                        <p class="setting-item-title">アイコン画像</p>
+                        <p class="setting-item-data">
+                            <% if current_user.image.attached? %>
+                                <%= image_tag current_user.image, size: "40x40" %>
+                            <% else %>
+                                <%# 画像がない時のデフォルト画像（後述） %>
+                                <%= image_tag "https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png", size: "40x40" %>
+                            <% end %>
+                        </p>
+                    </div>
+                    <div class="setting-item">
+                        <p class="setting-item-title">名前</p>
+                        <p class="setting-item-data"><%= current_user.name %></p>
+                    </div>
+                    <div class="setting-item">
+                        <p class="setting-item-title">自己紹介</p>
+                        <p class="setting-item-data"><%= current_user.introduction %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%= render "shared/footer" %>
+
+
+</body>

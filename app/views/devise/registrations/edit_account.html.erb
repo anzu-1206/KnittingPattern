@@ -1,0 +1,41 @@
+<%= stylesheet_link_tag "users_new", "data-turbo-track": "reload" %>
+
+<body>
+
+<div class="new">
+    <div class="signup">
+
+        <%= form_with model: @user, url: registration_path(@user), method: :patch, local: true, data: { turbo: false } do |f| %>
+
+
+            <div class="new-table">
+                <h3 class="signup-title">ユーザー情報編集</h3>
+
+                <div class="new-form">
+                    <label><%= f.label :email ,"メールアドレス" %></label>
+                    <%= f.email_field :email, placeholder: "メールアドレスを入力", :class =>"form-text" %>
+                </div>
+
+                <div class="new-form">
+                    <%= f.label :current_password, "現在のパスワード" %>
+                    <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "現在のパスワードを入力", :class =>"form-text" %>
+                </div>
+
+                <div class="new-form">
+                    <label><%= f.label :password ,"パスワード" %></label>
+                    <%= f.password_field :password, placeholder: "パスワードを入力", :class =>"form-text" %>
+                </div>
+
+
+
+            <div class="submit-form">
+                <ul class="buttons">
+                    <li><%= f.submit "編集内容を登録", :class =>"submit"%></li>
+                    <li class="li-login"><%= link_to "キャンセル", account_setting_user_session_path, :class =>"cansel" %></li>
+                </ul>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+</body>

@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "bookmark_button_#{pattern.id}", class: "bookmark-frame" do %>
+    <% if user_signed_in? %>
+        <% if current_user.bookmarks.exists?(pattern_id: pattern.id) %>
+        
+        <%= button_to pattern_bookmarks_path(pattern), method: :delete, class: "bookmark-btn is-saved", title: "保存を解除" do %>
+            <span class="bookmark-icon">🔖</span>
+        <% end %>
+
+        <% else %>
+
+        <%= button_to pattern_bookmarks_path(pattern), method: :post, class: "bookmark-btn is-unsaved", title: "保存" do %>
+            <span class="bookmark-icon">🔖</span>
+        <% end %>
+
+        <% end %>
+    <% end %>
+<% end %>

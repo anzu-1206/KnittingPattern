@@ -1,0 +1,75 @@
+<%= stylesheet_link_tag "posts_index", "data-turbo-track": "reload" %>
+
+<div class="explore-container">
+    
+    <div class="explore-header-section">
+        <div class="explore-title">
+            <h1>みんなの編み図</h1>
+            <p>世界中のみんなが作った素敵なパターンを見てみよう</p>
+        </div>
+
+        <div class="explore-filters">
+            <%= search_form_for @q do |f| %>
+                <div class="search-box">
+                    <%= f.search_field :title_cont, placeholder: "作品名や作者名で検索...", :class => "search-input" %>
+                    <%= f.submit "検索", :class => "search-btn" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+
+    <%= turbo_frame_tag "patterns-list" do %>
+    
+        <div class="category-pills">
+            <%= link_to "すべて", posts_path, class: "pill #{'active' if params[:category].blank? && params[:bookmark].blank?}" %>
+            <%= link_to "キャラクター", posts_path(category: "キャラクター"), class: "pill #{'active' if params[:category] == 'キャラクター'}" %>
+            <%= link_to "動物・生き物", posts_path(category: "動物・生き物"), class: "pill #{'active' if params[:category] == '動物・生き物'}" %>
+            <%= link_to "お花・植物", posts_path(category: "お花・植物"), class: "pill #{'active' if params[:category] == 'お花・植物'}" %>
+            <%= link_to "幾何学・ノルディック", posts_path(category: "幾何学・ノルディック"), class: "pill #{'active' if params[:category] == '幾何学・ノルディック'}" %>
+            <%= link_to "冬小物", posts_path(category: "冬小物"), class: "pill #{'active' if params[:category] == '冬小物'}" %>
+            <%= link_to "その他", posts_path(category: "その他"), class: "pill #{'active' if params[:category] == 'その他'}" %>
+            <% if user_signed_in? %>
+                <%= link_to "保存済み", posts_path(bookmark: true), class: "pill #{'active' if params[:bookmark].present?}" %>
+            <% end %>
+        </div>
+
+        <div class="explore-grid fade-in-grid">
+            <% @public_patterns.each do |pattern| %>
+            <div class="explore-card">
+                
+                <div class="card-image-wrapper">
+                    <%= link_to pattern_path(pattern), data: { turbo_frame: "_top" } do %>
+                        <% if pattern.image.attached? %>
+                        <%= image_tag pattern.image, class: "explore-card-img" %>
+                        <% else %>
+                        <div class="explore-placeholder">No Image</div>
+                        <% end %>
+                    <% end %>
+
+                    <span class="explore-category-badge"><%= pattern.category || "未分類" %></span>
+
+                    <%= render "bookmarks/bookmark", pattern: pattern %>
+                </div>
+
+                <div class="explore-card-info">
+                    <%= link_to pattern_path(pattern), class: "title-link", data: { turbo_frame: "_top" } do %>
+                        <h3 class="explore-card-title"><%= pattern.title %></h3>
+                    <% end %>
+                
+                    <div class="explore-card-meta">
+                        <div class="author-info">
+                            <div class="author-avatar">👤</div>
+                            <span class="author-name"><%= pattern.user&.name || "名無しさん" %></span>
+                        </div>
+                        <span class="post-date"><%= pattern.created_at.to_fs(:datetime_jp) %></span>
+                    </div>
+                </div>
+
+            </div>
+            <% end %>
+        </div>
+        
+    <% end %>
+    </div>
+
+    <%= render "shared/footer" %>
