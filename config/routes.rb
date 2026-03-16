@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  resources :patterns do
+    resource :bookmarks, only: [:create, :destroy]
+  end
+
   devise_scope :user do
     get 'account_setting', to: 'users/sessions#account_setting', as: :account_setting_user_session
     get 'edit_profile', to: 'users/registrations#edit_profile', as: :edit_profile_user_registration

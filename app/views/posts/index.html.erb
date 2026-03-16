@@ -21,13 +21,16 @@
     <%= turbo_frame_tag "patterns-list" do %>
     
         <div class="category-pills">
-            <%= link_to "すべて", posts_path, class: "pill #{'active' if params[:category].blank?}" %>
+            <%= link_to "すべて", posts_path, class: "pill #{'active' if params[:category].blank? && params[:bookmark].blank?}" %>
             <%= link_to "キャラクター", posts_path(category: "キャラクター"), class: "pill #{'active' if params[:category] == 'キャラクター'}" %>
             <%= link_to "動物・生き物", posts_path(category: "動物・生き物"), class: "pill #{'active' if params[:category] == '動物・生き物'}" %>
             <%= link_to "お花・植物", posts_path(category: "お花・植物"), class: "pill #{'active' if params[:category] == 'お花・植物'}" %>
             <%= link_to "幾何学・ノルディック", posts_path(category: "幾何学・ノルディック"), class: "pill #{'active' if params[:category] == '幾何学・ノルディック'}" %>
             <%= link_to "冬小物", posts_path(category: "冬小物"), class: "pill #{'active' if params[:category] == '冬小物'}" %>
             <%= link_to "その他", posts_path(category: "その他"), class: "pill #{'active' if params[:category] == 'その他'}" %>
+            <% if user_signed_in? %>
+                <%= link_to "保存済み", posts_path(bookmark: true), class: "pill #{'active' if params[:bookmark].present?}" %>
+            <% end %>
         </div>
 
         <div class="explore-grid fade-in-grid">
@@ -45,9 +48,7 @@
 
                     <span class="explore-category-badge"><%= pattern.category || "未分類" %></span>
 
-                    <div class="card-overlay-actions">
-                        <button class="action-icon-btn save" title="保存">🔖</button>
-                    </div>
+                    <%= render "bookmarks/bookmark", pattern: pattern %>
                 </div>
 
                 <div class="explore-card-info">
