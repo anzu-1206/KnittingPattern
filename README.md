@@ -5,9 +5,8 @@
 画像の自動変換機能や、実際の編み目に合わせた比率調整機能を備え、アイデアを形にします。
 
 ## 2. アプリのスクショ
-![トップ画面](images/home-page.png)
-![作成画面](images/create.png)
-> ※ここにGIF動画（操作している様子）を貼るとさらに魅力が伝わります！
+![トップ画面](app/images/home-page.png)
+![作成画面](app/images/create.png)
 
 ## 3. 使い方
 1. 図案を作る: 好きな画像を読み込んで自動でドット絵に変換するか、ゼロからキャンバスにポチポチと描画します。
@@ -47,7 +46,7 @@ Heroku（デプロイ）
 Git / GitHub（バージョン管理）
 
 ## 7. ER図
-![ER図](images/mermaid-diagram.png)
+![ER図](app/images/mermaid-diagram.png)
 
 > ### 主なテーブル構成
 > * Users: ユーザー情報
