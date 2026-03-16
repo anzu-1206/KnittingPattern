@@ -1,0 +1,17 @@
+<%= stylesheet_link_tag "footer", "data-turbo-track": "reload" %>
+
+<body>
+    <div class="footer">
+        <div>
+            <p>Ami-Labo（ロゴ）</p>
+        </div>
+        <div>
+            <ul class="footer-contents-list">
+                <li><%=link_to "パターン一覧", makepatterns_index_path, :class => "footer-link" %></li>
+                <li><%=link_to "投稿ページ", makepatterns_index_path, :class => "footer-link" %></li>
+                <li><%=link_to "お問い合わせ", makepatterns_index_path, :class => "footer-link" %></li>
+                <li><%=link_to "作者について", makepatterns_index_path, :class => "footer-link" %></li>
+            </ul>
+        </div>
+    </div>
+</body>
